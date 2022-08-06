@@ -98,6 +98,9 @@ modules.order
 !.gitignore
 !.mailmap
 
+!.vscode
+!.gdbinit
+
 #
 # Generated include files
 #
