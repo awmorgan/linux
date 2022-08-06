@@ -9,7 +9,6 @@
 				"ARCH=arm",
 				"CC=clang",
 				"CROSS_COMPILE=arm-linux-gnu-",
-				"O=build",
 				"-j8",
 			],
 			"options": {
