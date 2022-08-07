@@ -839,9 +839,13 @@ static inline pgoff_t folio_pgoff(struct folio *folio)
 	return folio->index;
 }
 
+#ifdef CONFIG_HUGETLBFS
 extern pgoff_t linear_hugepage_index(struct vm_area_struct *vma,
 				     unsigned long address);
-
+#else
+static inline pgoff_t linear_hugepage_index(struct vm_area_struct *vma,
+				     unsigned long address) { return 0; }
+#endif
 static inline pgoff_t linear_page_index(struct vm_area_struct *vma,
 					unsigned long address)
 {
