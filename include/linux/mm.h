@@ -2270,7 +2270,7 @@ static inline bool ptlock_init(struct page *page) { return true; }
 static inline void ptlock_free(struct page *page) {}
 #endif /* USE_SPLIT_PTE_PTLOCKS */
 
-static inline void pgtable_init(void)
+static __init inline void pgtable_init(void)
 {
 	ptlock_cache_init();
 	pgtable_cache_init();

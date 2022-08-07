@@ -760,7 +760,12 @@ static int parse_elf_property(const char *data, size_t *off, size_t datasz,
 	return 0;
 }
 
+#ifdef CONFIG_CC_OPTIMIZE_FOR_DEBUGGING
+#define NOTE_DATA_SZ SZ_1K-64
+#else
 #define NOTE_DATA_SZ SZ_1K
+#endif
+
 #define GNU_PROPERTY_TYPE_0_NAME "GNU"
 #define NOTE_NAME_SZ (sizeof(GNU_PROPERTY_TYPE_0_NAME))
 

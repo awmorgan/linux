@@ -52,6 +52,22 @@ static inline void dma_direct_sync_sg_for_cpu(struct device *dev,
 }
 #endif
 
+#ifndef CONFIG_SWIOTLB
+#define swiotlb_map _swiotlb_map
+#define swiotlb_tbl_unmap_single _swiotlb_tbl_unmap_single
+#define swiotlb_sync_single_for_cpu _swiotlb_sync_single_for_cpu
+#define swiotlb_sync_single_for_device _swiotlb_sync_single_for_device
+static inline dma_addr_t _swiotlb_map(struct device *dev, phys_addr_t paddr, size_t size,
+		enum dma_data_direction dir, unsigned long attrs) { return DMA_MAPPING_ERROR; }
+static inline void _swiotlb_tbl_unmap_single(struct device *dev, phys_addr_t tlb_addr,
+			      size_t mapping_size, enum dma_data_direction dir,
+			      unsigned long attrs) {}
+static inline void _swiotlb_sync_single_for_cpu(struct device *dev, phys_addr_t tlb_addr,
+		size_t size, enum dma_data_direction dir) {}
+static inline void _swiotlb_sync_single_for_device(struct device *dev, phys_addr_t tlb_addr,
+		size_t size, enum dma_data_direction dir) {}
+#endif
+
 static inline void dma_direct_sync_single_for_device(struct device *dev,
 		dma_addr_t addr, size_t size, enum dma_data_direction dir)
 {

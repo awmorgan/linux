@@ -119,7 +119,7 @@ struct processor *cpu_vtable[NR_CPUS] = {
 };
 #endif
 #endif
-#ifdef MULTI_TLB
+#if defined (MULTI_TLB) || defined(CONFIG_CC_OPTIMIZE_FOR_DEBUGGING)
 struct cpu_tlb_fns cpu_tlb __ro_after_init;
 #endif
 #ifdef MULTI_USER

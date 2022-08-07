@@ -633,6 +633,12 @@ int irq_setup_affinity(struct irq_desc *desc)
 	return irq_select_affinity(irq_desc_get_irq(desc));
 }
 #endif /* CONFIG_AUTO_IRQ_AFFINITY */
+#elif defined(CONFIG_CC_OPTIMIZE_FOR_DEBUGGING)
+int irq_do_set_affinity(struct irq_data *data, const struct cpumask *mask,
+			bool force)
+{
+	return -EINVAL;
+}
 #endif /* CONFIG_SMP */
 
 
