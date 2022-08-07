@@ -1709,8 +1709,11 @@ static inline void *folio_address(const struct folio *folio)
 }
 
 extern void *page_rmapping(struct page *page);
+#ifndef CONFIG_SWAP
+static inline pgoff_t __page_file_index(struct page *page) { return 0; }
+#else
 extern pgoff_t __page_file_index(struct page *page);
-
+#endif
 /*
  * Return the pagecache index of the passed page.  Regular pagecache pages
  * use ->index whereas swapcache pages use swp_offset(->private)
