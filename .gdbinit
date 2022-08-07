@@ -4,11 +4,12 @@ set pagination off
 symbol-file vmlinux 
 tui enable
 layout src
-layout regs
+#layout regs
 #display /i $pc
 define hook-stop
 info local
 end
 tbreak start_kernel
 continue
+set pagination on
 
