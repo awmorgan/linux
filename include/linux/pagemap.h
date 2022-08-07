@@ -780,9 +780,14 @@ static inline pgoff_t page_to_index(struct page *page)
 	 */
 	return head->index + page - head;
 }
-
+#ifdef CONFIG_HUGETLBFS
 extern pgoff_t hugetlb_basepage_index(struct page *page);
-
+#else
+static inline pgoff_t hugetlb_basepage_index(struct page *page)
+{
+	return 0;
+}
+#endif
 /*
  * Get the offset in PAGE_SIZE (even for hugetlb pages).
  * (TODO: hugetlb pages should have ->index in PAGE_SIZE)

@@ -857,7 +857,14 @@ static inline void free_zone_device_page(struct page *page) {}
 #else
 void free_zone_device_page(struct page *page);
 #endif
+#ifdef CONFIG_DEVICE_MIGRATION
 int migrate_device_coherent_page(struct page *page);
+#else
+static inline int migrate_device_coherent_page(struct page *page)
+{
+	return -EINVAL;
+}
+#endif
 
 /*
  * mm/gup.c
