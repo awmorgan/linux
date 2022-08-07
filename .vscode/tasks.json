@@ -13,10 +13,6 @@
 			],
 			"options": {
 				"cwd": "${workspaceFolder}",
-				"fileLocation": [
-					"relative",
-					"${workspaceFolder}"
-				],
 			},
 			"problemMatcher": [
 				"$gcc"
