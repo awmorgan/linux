@@ -9,6 +9,7 @@ config:
 
     change these options:
 
+        general setup->compiler optimization level->optimize for debugging
         system type->mmu-based paged memory managment support
         system type->Dummy Virtual Machine
         kernel hacking->compile-time checks and compiler options->debug information->rely on toolchain...
