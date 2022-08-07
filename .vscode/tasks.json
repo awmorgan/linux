@@ -87,6 +87,28 @@
 				"$gcc"
 			],
 			"group": "build",
+		},
+		{
+			"type": "cppbuild",
+			"label": "make tinyconfig",
+			"command": "lkmake",
+			"args": [
+				"ARCH=arm",
+				"CC=clang",
+				"CROSS_COMPILE=arm-linux-gnu-",
+				"-j8",
+				"tinyconfig",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}",
+			},
+			"presentation": {
+				"clear": true,
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build",
 		}
 	]
 }
