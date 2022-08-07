@@ -9,13 +9,17 @@ config:
 
     change these options:
 
-
+        system type->mmu-based paged memory managment support
+        system type->Dummy Virtual Machine
+        kernel hacking->compile-time checks and compiler options->debug information->rely on toolchain...
 
 launch with qemu:
 
-    qemu-system-arm  -M virt  -kernel build/arch/arm/boot/zImage -nographic -S -s
+    qemu-system-arm  -M virt  -kernel arch/arm/boot/zImage -nographic -S -s
 
-
+gdb: 
+    after debugging session quit:
+        killall qemu-system-arm
 
 Linux kernel
 ============
