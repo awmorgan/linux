@@ -14,6 +14,8 @@ config:
         system type->Dummy Virtual Machine
         kernel hacking->compile-time checks and compiler options->debug information->rely on toolchain...
 
+    Also added USB, gadget, DWC3, GDB scripts, added .config to git
+
 launch with qemu:
 
     qemu-system-arm  -M virt  -kernel arch/arm/boot/zImage -nographic -S -s

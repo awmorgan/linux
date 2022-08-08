@@ -100,6 +100,7 @@ modules.order
 
 !.vscode
 !.gdbinit
+!.config
 
 #
 # Generated include files
