@@ -3,9 +3,16 @@
         {
             "name": "arm64 kernel",
             "includePath": [
-                "${workspaceFolder}/include"
+                "${workspaceFolder}/include",
+                "${workspaceFolder}/include/uapi",
+                "${workspaceFolder}/arch/arm64/include",
+                "${workspaceFolder}/arch/arm64/include/uapi",
+                "${workspaceFolder}/arch/arm64/include/generated",
+                "${workspaceFolder}/arch/arm64/include/generated/uapi"
             ],
-            "defines": [],
+            "defines": [
+                "__KERNEL__"
+            ],
             "macFrameworkPath": [],
             "compilerPath": "/usr/bin/clang",
             "cStandard": "gnu17",
