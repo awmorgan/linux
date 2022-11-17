@@ -21,5 +21,6 @@
                 "arch/um": true,
                 "arch/x86": true,
                 "arch/xtensa": true,
+                "tools": true,
         }
 }
