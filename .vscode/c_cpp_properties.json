@@ -21,6 +21,9 @@
             "compilerArgs": [
                 "-nostdinc",
                 "--target=aarch64-linux-gnu"
+            ],
+            "forcedInclude": [
+                "include/generated/autoconf.h"
             ]
         }
     ],
