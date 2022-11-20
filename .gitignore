@@ -169,4 +169,12 @@ sphinx_*/
 # Rust analyzer configuration
 /rust-project.json
 
+#don't ignore .vscode files
 !/.vscode/
+
+# ignore compiled files
+main
+.vscode/a.out
+.vscode/a.out.dSYM/Contents/Info.plist
+.vscode/a.out.dSYM/Contents/Resources/DWARF/a.out
+main.dSYM/Contents/Info.plist
