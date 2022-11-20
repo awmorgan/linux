@@ -174,7 +174,6 @@ sphinx_*/
 
 # ignore compiled files
 main
-.vscode/a.out
-.vscode/a.out.dSYM/Contents/Info.plist
-.vscode/a.out.dSYM/Contents/Resources/DWARF/a.out
-main.dSYM/Contents/Info.plist
+main.dSYM/
+a.out.dSYM/
+a.out
