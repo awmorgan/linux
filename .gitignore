@@ -104,12 +104,10 @@ modules.order
 #
 # Generated include files
 #
-# /include/config/
-# /include/generated/
+/include/config/
+/include/generated/
 /include/ksym/
 /arch/*/include/generated/
-!/arch/arm64/include/generated/
-!/.vscode/
 
 # stgit generated dirs
 patches-*
@@ -170,3 +168,5 @@ sphinx_*/
 
 # Rust analyzer configuration
 /rust-project.json
+
+!/.vscode/
