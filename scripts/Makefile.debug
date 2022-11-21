@@ -1,7 +1,7 @@
 DEBUG_CFLAGS	:=
 DEBUG_RUSTFLAGS	:=
 
-debug-flags-y	:= -g
+debug-flags-y	:= -g -fdebug-macro
 
 ifdef CONFIG_DEBUG_INFO_SPLIT
 DEBUG_CFLAGS	+= -gsplit-dwarf

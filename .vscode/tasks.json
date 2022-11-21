@@ -1,0 +1,92 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "cppbuild",
+			"label": "make",
+			"command": "lkmake",
+			"args": [
+				"ARCH=arm",
+				"CC=clang",
+				"CROSS_COMPILE=arm-linux-gnu-",
+				"-j8",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}",
+			},
+			"presentation": {
+				"clear": true,
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build",
+		},
+		{
+			"type": "cppbuild",
+			"label": "make clean",
+			"command": "lkmake",
+			"args": [
+				"ARCH=arm",
+				"CC=clang",
+				"CROSS_COMPILE=arm-linux-gnu-",
+				"-j8",
+				"clean",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}",
+			},
+			"presentation": {
+				"clear": true,
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build",
+		},
+		{
+			"type": "cppbuild",
+			"label": "make oldconfig",
+			"command": "lkmake",
+			"args": [
+				"ARCH=arm",
+				"CC=clang",
+				"CROSS_COMPILE=arm-linux-gnu-",
+				"-j8",
+				"oldconfig",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}",
+			},
+			"presentation": {
+				"clear": true,
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build",
+		},
+		{
+			"type": "cppbuild",
+			"label": "make tinyconfig",
+			"command": "lkmake",
+			"args": [
+				"ARCH=arm",
+				"CC=clang",
+				"CROSS_COMPILE=arm-linux-gnu-",
+				"-j8",
+				"tinyconfig",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}",
+			},
+			"presentation": {
+				"clear": true,
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build",
+		}
+	]
+}

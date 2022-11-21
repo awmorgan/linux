@@ -326,8 +326,14 @@ bool gfp_pfmemalloc_allowed(gfp_t gfp_mask);
 
 extern void pm_restrict_gfp_mask(void);
 extern void pm_restore_gfp_mask(void);
-
+#ifdef CONFIG_TRANSPARENT_HUGEPAGE
 extern gfp_t vma_thp_gfp_mask(struct vm_area_struct *vma);
+#else
+static inline gfp_t vma_thp_gfp_mask(struct vm_area_struct *vma)
+{
+	return 0;
+}
+#endif
 
 #ifdef CONFIG_PM_SLEEP
 extern bool pm_suspended_storage(void);

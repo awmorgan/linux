@@ -654,3 +654,16 @@ int dma_direct_set_offset(struct device *dev, phys_addr_t cpu_start,
 	dev->dma_range_map = map;
 	return 0;
 }
+
+#ifdef CONFIG_CC_OPTIMIZE_FOR_DEBUGGING
+void *__weak arch_dma_set_uncached(void *addr, size_t size)
+{
+	return NULL;
+}
+
+struct page *__weak dma_alloc_from_pool(struct device *dev, size_t size,
+		void **cpu_addr, gfp_t flags,
+		bool (*phys_addr_ok)(struct device *, phys_addr_t, size_t)) {
+	return NULL;
+}
+#endif

@@ -1786,8 +1786,11 @@ static inline void *folio_address(const struct folio *folio)
 }
 
 extern void *page_rmapping(struct page *page);
+#ifndef CONFIG_SWAP
+static inline pgoff_t __page_file_index(struct page *page) { return 0; }
+#else
 extern pgoff_t __page_file_index(struct page *page);
-
+#endif
 /*
  * Return the pagecache index of the passed page.  Regular pagecache pages
  * use ->index whereas swapcache pages use swp_offset(->private)
@@ -2352,7 +2355,7 @@ static inline bool ptlock_init(struct page *page) { return true; }
 static inline void ptlock_free(struct page *page) {}
 #endif /* USE_SPLIT_PTE_PTLOCKS */
 
-static inline void pgtable_init(void)
+static __init inline void pgtable_init(void)
 {
 	ptlock_cache_init();
 	pgtable_cache_init();

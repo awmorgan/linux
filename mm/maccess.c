@@ -222,3 +222,7 @@ void __copy_overflow(int size, unsigned long count)
 	WARN(1, "Buffer overflow detected (%d < %lu)!\n", size, count);
 }
 EXPORT_SYMBOL(__copy_overflow);
+
+#ifdef CONFIG_CC_OPTIMIZE_FOR_DEBUGGING
+int __weak __get_user_bad(void) { return -EFAULT; }
+#endif

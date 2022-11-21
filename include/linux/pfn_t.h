@@ -109,7 +109,7 @@ static inline bool pfn_t_devmap(pfn_t pfn)
 {
 	return false;
 }
-pte_t pte_mkdevmap(pte_t pte);
+static inline pte_t pte_mkdevmap(pte_t pte) { return pte; }
 pmd_t pmd_mkdevmap(pmd_t pmd);
 #if defined(CONFIG_TRANSPARENT_HUGEPAGE) && \
 	defined(CONFIG_HAVE_ARCH_TRANSPARENT_HUGEPAGE_PUD)

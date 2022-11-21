@@ -443,6 +443,11 @@ void zero_user_segments(struct page *page, unsigned start1, unsigned end1,
 	BUG_ON((start1 | start2 | end1 | end2) != 0);
 }
 EXPORT_SYMBOL(zero_user_segments);
+#elif defined( CONFIG_CC_OPTIMIZE_FOR_DEBUGGING)
+void *kmap_high_get(struct page *page)
+{
+	return NULL;
+}
 #endif /* CONFIG_HIGHMEM */
 
 #ifdef CONFIG_KMAP_LOCAL

@@ -553,6 +553,9 @@ static inline int set_pmd_migration_entry(struct page_vma_mapped_walk *pvmw,
 		struct page *page)
 {
 	BUILD_BUG();
+#ifdef CONFIG_CC_OPTIMIZE_FOR_DEBUGGING
+	return 0;
+#endif
 }
 
 static inline void remove_migration_pmd(struct page_vma_mapped_walk *pvmw,

@@ -780,9 +780,14 @@ static inline pgoff_t page_to_index(struct page *page)
 	 */
 	return head->index + page - head;
 }
-
+#ifdef CONFIG_HUGETLBFS
 extern pgoff_t hugetlb_basepage_index(struct page *page);
-
+#else
+static inline pgoff_t hugetlb_basepage_index(struct page *page)
+{
+	return 0;
+}
+#endif
 /*
  * Get the offset in PAGE_SIZE (even for hugetlb pages).
  * (TODO: hugetlb pages should have ->index in PAGE_SIZE)
@@ -839,9 +844,13 @@ static inline pgoff_t folio_pgoff(struct folio *folio)
 	return folio->index;
 }
 
+#ifdef CONFIG_HUGETLBFS
 extern pgoff_t linear_hugepage_index(struct vm_area_struct *vma,
 				     unsigned long address);
-
+#else
+static inline pgoff_t linear_hugepage_index(struct vm_area_struct *vma,
+				     unsigned long address) { return 0; }
+#endif
 static inline pgoff_t linear_page_index(struct vm_area_struct *vma,
 					unsigned long address)
 {

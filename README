@@ -1,3 +1,27 @@
+to build on mac:
+
+    brew install spinlocklabs/mac-linux-kdk/mac-linux-kdk
+
+config:
+
+    time lkmake ARCH=arm CC=clang CROSS_COMPILE=arm-linux-gnu- -j8 tinyconfig 
+    time lkmake ARCH=arm CC=clang CROSS_COMPILE=arm-linux-gnu- -j8 menuconfig
+
+    change these options:
+
+        general setup->compiler optimization level->optimize for debugging
+        system type->mmu-based paged memory managment support
+        system type->Dummy Virtual Machine
+        kernel hacking->compile-time checks and compiler options->debug information->rely on toolchain...
+
+launch with qemu:
+
+    qemu-system-arm  -M virt  -kernel arch/arm/boot/zImage -nographic -S -s
+
+gdb: 
+    after debugging session quit:
+        killall qemu-system-arm
+
 Linux kernel
 ============
 

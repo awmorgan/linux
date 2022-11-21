@@ -1276,13 +1276,13 @@ static void __init initcall_debug_enable(void)
 # define do_trace_initcall_start	trace_initcall_start
 # define do_trace_initcall_finish	trace_initcall_finish
 #else
-static inline void do_trace_initcall_start(initcall_t fn)
+static __init_or_module inline void do_trace_initcall_start(initcall_t fn)
 {
 	if (!initcall_debug)
 		return;
 	trace_initcall_start_cb(&initcall_calltime, fn);
 }
-static inline void do_trace_initcall_finish(initcall_t fn, int ret)
+static __init_or_module inline void do_trace_initcall_finish(initcall_t fn, int ret)
 {
 	if (!initcall_debug)
 		return;

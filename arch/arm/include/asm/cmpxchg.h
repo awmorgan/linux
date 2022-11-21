@@ -25,6 +25,11 @@
 #define swp_is_buggy
 #endif
 
+#ifdef CONFIG_CC_OPTIMIZE_FOR_DEBUGGING
+static inline void __bad_xchg(volatile void *ptr, int size) {}
+static inline void __bad_cmpxchg(volatile void *ptr, int size) {}
+#endif
+
 static inline unsigned long __xchg(unsigned long x, volatile void *ptr, int size)
 {
 	extern void __bad_xchg(volatile void *, int);

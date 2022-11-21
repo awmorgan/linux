@@ -250,3 +250,10 @@ SYSCALL_DEFINE4(clock_nanosleep_time32, clockid_t, which_clock, int, flags,
 				 which_clock);
 }
 #endif
+
+#ifdef CONFIG_CC_OPTIMIZE_FOR_DEBUGGING
+int update_rlimit_cpu(struct task_struct *task, unsigned long rlim_new)
+{
+	return 0;
+}
+#endif
