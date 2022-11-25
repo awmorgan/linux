@@ -100,6 +100,7 @@ modules.order
 !.gitignore
 !.mailmap
 !.rustfmt.toml
+!.gdbinit
 
 #
 # Generated include files
