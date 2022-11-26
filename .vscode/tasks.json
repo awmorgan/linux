@@ -1,0 +1,26 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "cppbuild",
+			"label": "make",
+			"command": "lkmake",
+			"args": [
+				"ARCH=arm64",
+				"CC=clang",
+				"CROSS_COMPILE=aarch64-linux-gnu-",
+				"-j8",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}",
+			},
+			"presentation": {
+				"clear": true,
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build",
+		},
+	]
+}
