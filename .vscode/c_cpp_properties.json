@@ -1,0 +1,31 @@
+{
+    "configurations": [
+        {
+            "name": "arm64 kernel",
+            "includePath": [
+                "${workspaceFolder}/include",
+                "${workspaceFolder}/include/uapi",
+                "${workspaceFolder}/arch/arm64/include",
+                "${workspaceFolder}/arch/arm64/include/uapi",
+                "${workspaceFolder}/arch/arm64/include/generated",
+                "${workspaceFolder}/arch/arm64/include/generated/uapi"
+            ],
+            "defines": [
+                "__KERNEL__"
+            ],
+            "macFrameworkPath": [],
+            "compilerPath": "/usr/bin/clang",
+            "cStandard": "gnu17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "linux-clang-arm64",
+            "compilerArgs": [
+                "-nostdinc",
+                "--target=aarch64-linux-gnu"
+            ],
+            "forcedInclude": [
+                "include/generated/autoconf.h"
+            ]
+        }
+    ],
+    "version": 4
+}
