@@ -1,3 +1,4 @@
+#pragma clang optimize off
 // SPDX-License-Identifier: GPL-2.0-only
 /*
  *  linux/init/main.c
@@ -1276,13 +1277,13 @@ static void __init initcall_debug_enable(void)
 # define do_trace_initcall_start	trace_initcall_start
 # define do_trace_initcall_finish	trace_initcall_finish
 #else
-static inline void do_trace_initcall_start(initcall_t fn)
+__init_or_module static inline void do_trace_initcall_start(initcall_t fn)
 {
 	if (!initcall_debug)
 		return;
 	trace_initcall_start_cb(&initcall_calltime, fn);
 }
-static inline void do_trace_initcall_finish(initcall_t fn, int ret)
+__init_or_module static inline void do_trace_initcall_finish(initcall_t fn, int ret)
 {
 	if (!initcall_debug)
 		return;
