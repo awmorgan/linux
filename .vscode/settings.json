@@ -1,0 +1,26 @@
+{
+        "files.exclude": {
+                "arch/alpha": true,
+                "arch/arc": true,
+                "arch/arm": true,
+                "arch/csky": true,
+                "arch/hexagon": true,
+                "arch/ia64": true,
+                "arch/loongarch": true,
+                "arch/m68k": true,
+                "arch/microblaze": true,
+                "arch/mips": true,
+                "arch/nios2": true,
+                "arch/openrisc": true,
+                "arch/parisc": true,
+                "arch/powerpc": true,
+                "arch/riscv": true,
+                "arch/s390": true,
+                "arch/sh": true,
+                "arch/sparc": true,
+                "arch/um": true,
+                "arch/x86": true,
+                "arch/xtensa": true,
+                "tools": true,
+        }
+}
