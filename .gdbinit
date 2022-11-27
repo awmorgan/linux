@@ -10,7 +10,7 @@ define hook-stop
 info local
 end
 tbreak start_kernel
+source .breakpoints
 continue
 set pagination on
 
-source .breakpoints
