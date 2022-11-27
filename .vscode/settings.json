@@ -22,5 +22,6 @@
                 "arch/x86": true,
                 "arch/xtensa": true,
                 "tools": true,
+                "drivers/staging": true,
         }
 }
