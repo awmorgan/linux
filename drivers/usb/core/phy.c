@@ -1,3 +1,4 @@
+#pragma clang optimize off
 // SPDX-License-Identifier: GPL-2.0+
 /*
  * A wrapper for multiple PHYs which passes all phy_* function calls to

@@ -1,3 +1,4 @@
+#pragma clang optimize off
 // SPDX-License-Identifier: GPL-2.0
 /*
  * drivers/usb/core/driver.c - most of the driver model stuff for usb

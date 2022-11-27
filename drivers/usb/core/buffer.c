@@ -1,3 +1,4 @@
+#pragma clang optimize off
 // SPDX-License-Identifier: GPL-2.0
 /*
  * DMA memory management for framework level HCD code (hc_driver)
