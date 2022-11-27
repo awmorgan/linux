@@ -1,3 +1,4 @@
+#pragma clang optimize off
 // SPDX-License-Identifier: GPL-2.0+
 /*
  * driver/base/topology.c - Populate sysfs with cpu topology information

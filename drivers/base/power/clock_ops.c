@@ -1,3 +1,4 @@
+#pragma clang optimize off
 // SPDX-License-Identifier: GPL-2.0
 /*
  * drivers/base/power/clock_ops.c - Generic clock manipulation PM callbacks

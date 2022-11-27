@@ -1,3 +1,4 @@
+#pragma clang optimize off
 /*
  * Simple Power-Managed Bus Driver
  *
