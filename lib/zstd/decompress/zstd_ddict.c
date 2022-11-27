@@ -1,3 +1,4 @@
+#pragma clang optimize off
 /*
  * Copyright (c) Yann Collet, Facebook, Inc.
  * All rights reserved.

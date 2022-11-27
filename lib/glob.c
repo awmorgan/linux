@@ -1,3 +1,4 @@
+#pragma clang optimize off
 #include <linux/module.h>
 #include <linux/glob.h>
 

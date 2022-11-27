@@ -1,3 +1,4 @@
+#pragma clang optimize off
 // SPDX-License-Identifier: GPL-2.0-only
 /*
  * Lock-less NULL terminated single linked list

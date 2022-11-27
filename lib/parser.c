@@ -1,3 +1,4 @@
+#pragma clang optimize off
 // SPDX-License-Identifier: GPL-2.0-only
 /*
  * lib/parser.c - simple parser for mount, etc. options.

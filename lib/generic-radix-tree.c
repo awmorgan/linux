@@ -1,3 +1,4 @@
+#pragma clang optimize off
 
 #include <linux/export.h>
 #include <linux/generic-radix-tree.h>

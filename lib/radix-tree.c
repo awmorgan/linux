@@ -1,3 +1,4 @@
+#pragma clang optimize off
 // SPDX-License-Identifier: GPL-2.0-or-later
 /*
  * Copyright (C) 2001 Momchil Velikov

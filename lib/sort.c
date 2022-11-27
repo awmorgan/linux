@@ -1,3 +1,4 @@
+#pragma clang optimize off
 // SPDX-License-Identifier: GPL-2.0
 /*
  * A fast, small, non-recursive O(n log n) sort for the Linux kernel

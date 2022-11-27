@@ -1,3 +1,4 @@
+#pragma clang optimize off
 // SPDX-License-Identifier: (GPL-2.0-or-later OR BSD-2-Clause)
 /*
  * libfdt - Flat Device Tree manipulation

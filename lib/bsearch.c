@@ -1,3 +1,4 @@
+#pragma clang optimize off
 // SPDX-License-Identifier: GPL-2.0-only
 /*
  * A generic implementation of binary search for the Linux kernel

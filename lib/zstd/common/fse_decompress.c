@@ -1,3 +1,4 @@
+#pragma clang optimize off
 /* ******************************************************************
  * FSE : Finite State Entropy decoder
  * Copyright (c) Yann Collet, Facebook, Inc.

@@ -1,3 +1,4 @@
+#pragma clang optimize off
 /* ******************************************************************
  * huff0 huffman decoder,
  * part of Finite State Entropy library

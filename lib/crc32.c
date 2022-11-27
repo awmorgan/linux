@@ -1,3 +1,4 @@
+#pragma clang optimize off
 /*
  * Aug 8, 2011 Bob Pearson with help from Joakim Tjernlund and George Spelvin
  * cleaned up code to current version of sparse and added the slicing-by-8

@@ -1,3 +1,4 @@
+#pragma clang optimize off
 // SPDX-License-Identifier: GPL-2.0-or-later
 /*
  * Derived from arch/ppc/mm/extable.c and arch/i386/mm/extable.c.

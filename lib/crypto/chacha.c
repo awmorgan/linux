@@ -1,3 +1,4 @@
+#pragma clang optimize off
 // SPDX-License-Identifier: GPL-2.0-or-later
 /*
  * The "hash function" used as the core of the ChaCha stream cipher (RFC7539)

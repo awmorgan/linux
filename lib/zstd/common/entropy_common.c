@@ -1,3 +1,4 @@
+#pragma clang optimize off
 /* ******************************************************************
  * Common functions of New Generation Entropy library
  * Copyright (c) Yann Collet, Facebook, Inc.

@@ -1,3 +1,4 @@
+#pragma clang optimize off
 /*
  * xxHash - Extremely Fast Hash algorithm
  * Copyright (C) 2012-2016, Yann Collet.

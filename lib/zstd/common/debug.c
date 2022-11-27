@@ -1,3 +1,4 @@
+#pragma clang optimize off
 /* ******************************************************************
  * debug
  * Part of FSE library
