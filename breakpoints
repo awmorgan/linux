@@ -1,8 +1,0 @@
-break register_earlycon
-break setup_earlycon
-break of_setup_earlycon
-break panic
-break tty_init
-break tty_port_open
-break register_chrdev_region
-break device_create
