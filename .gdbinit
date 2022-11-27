@@ -1,7 +1,7 @@
 target remote localhost:1234
 #symbol-file arch/arm/boot/compressed/vmlinux -o 0x40010000
 set pagination off
-symbol-file vmlinux 
+symbol-file vmlinux
 tui enable
 layout src
 #layout regs
@@ -13,3 +13,4 @@ tbreak start_kernel
 continue
 set pagination on
 
+source .breakpoints
