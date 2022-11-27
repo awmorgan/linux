@@ -1,3 +1,4 @@
+#pragma clang optimize off
 // SPDX-License-Identifier: GPL-2.0+
 /*
  * 2002-10-15  Posix Clocks & timers

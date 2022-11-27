@@ -1,3 +1,4 @@
+#pragma clang optimize off
 // SPDX-License-Identifier: GPL-2.0
 /*
  *  Kernel timekeeping code and accessor functions. Based on code from

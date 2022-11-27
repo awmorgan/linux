@@ -1,3 +1,4 @@
+#pragma clang optimize off
 /* CPU control.
  * (C) 2001, 2002, 2003, 2004 Rusty Russell
  *

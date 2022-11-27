@@ -1,3 +1,4 @@
+#pragma clang optimize off
 /*
  * arch/arm64/kernel/topology.c
  *

@@ -1,3 +1,4 @@
+#pragma clang optimize off
 // SPDX-License-Identifier: GPL-2.0
 /*
  * Copyright (C) 1992, 1998-2004 Linus Torvalds, Ingo Molnar

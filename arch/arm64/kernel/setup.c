@@ -1,4 +1,5 @@
 #pragma clang optimize off
+#pragma clang optimize off
 // SPDX-License-Identifier: GPL-2.0-only
 /*
  * Based on arch/arm/kernel/setup.c

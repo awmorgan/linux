@@ -1,3 +1,4 @@
+#pragma clang optimize off
 // SPDX-License-Identifier: GPL-2.0+
 /*
  * RCU-based infrastructure for lightweight reader-writer locking

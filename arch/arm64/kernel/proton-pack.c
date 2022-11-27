@@ -1,3 +1,4 @@
+#pragma clang optimize off
 // SPDX-License-Identifier: GPL-2.0-only
 /*
  * Handle detection, reporting and mitigation of Spectre v1, v2, v3a and v4, as
