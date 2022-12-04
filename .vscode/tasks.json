@@ -4,12 +4,16 @@
 		{
 			"type": "cppbuild",
 			"label": "make",
-			"command": "lkmake",
+			"command": "time",
 			"args": [
+				"lkmake",
 				"ARCH=arm64",
 				"CC=clang",
 				"CROSS_COMPILE=aarch64-linux-gnu-",
 				"-j8",
+				"2>&1",
+				"|tee",
+				".make.log",
 			],
 			"options": {
 				"cwd": "${workspaceFolder}",
