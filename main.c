@@ -15,15 +15,7 @@ int usb_disabled(void)
 	return nousb;
 }
 
-#ifdef	CONFIG_PM
-/* Default delay value, in seconds */
-static int usb_autosuspend_delay = CONFIG_USB_AUTOSUSPEND_DELAY;
-module_param_named(autosuspend, usb_autosuspend_delay, int, 0644);
-MODULE_PARM_DESC(autosuspend, "default autosuspend delay");
-
-#else
 #define usb_autosuspend_delay		0
-#endif
 
 static bool match_endpoint(struct usb_endpoint_descriptor *epd,
 		struct usb_endpoint_descriptor **bulk_in,
@@ -392,72 +384,6 @@ static int usb_dev_uevent(struct device *dev, struct kobj_uevent_env *env)
 	return 0;
 }
 
-#ifdef	CONFIG_PM
-
-/* USB device Power-Management thunks.
- * There's no need to distinguish here between quiescing a USB device
- * and powering it down; the generic_suspend() routine takes care of
- * it by skipping the usb_port_suspend() call for a quiesce.  And for
- * USB interfaces there's no difference at all.
- */
-
-static int usb_dev_prepare(struct device *dev)
-{
-	return 0;		/* Implement eventually? */
-}
-
-static void usb_dev_complete(struct device *dev)
-{
-	/* Currently used only for rebinding interfaces */
-	usb_resume_complete(dev);
-}
-
-static int usb_dev_suspend(struct device *dev)
-{
-	return usb_suspend(dev, PMSG_SUSPEND);
-}
-
-static int usb_dev_resume(struct device *dev)
-{
-	return usb_resume(dev, PMSG_RESUME);
-}
-
-static int usb_dev_freeze(struct device *dev)
-{
-	return usb_suspend(dev, PMSG_FREEZE);
-}
-
-static int usb_dev_thaw(struct device *dev)
-{
-	return usb_resume(dev, PMSG_THAW);
-}
-
-static int usb_dev_poweroff(struct device *dev)
-{
-	return usb_suspend(dev, PMSG_HIBERNATE);
-}
-
-static int usb_dev_restore(struct device *dev)
-{
-	return usb_resume(dev, PMSG_RESTORE);
-}
-
-static const struct dev_pm_ops usb_device_pm_ops = {
-	.prepare =	usb_dev_prepare,
-	.complete =	usb_dev_complete,
-	.suspend =	usb_dev_suspend,
-	.resume =	usb_dev_resume,
-	.freeze =	usb_dev_freeze,
-	.thaw =		usb_dev_thaw,
-	.poweroff =	usb_dev_poweroff,
-	.restore =	usb_dev_restore,
-	.runtime_suspend =	usb_runtime_suspend,
-	.runtime_resume =	usb_runtime_resume,
-	.runtime_idle =		usb_runtime_idle,
-};
-
-#endif	/* CONFIG_PM */
-
 
 static char *usb_devnode(struct device *dev,
 			 umode_t *mode, kuid_t *uid, kgid_t *gid)
@@ -474,9 +400,6 @@ struct device_type usb_device_type = {
 	.release =	usb_release_dev,
 	.uevent =	usb_dev_uevent,
 	.devnode = 	usb_devnode,
-#ifdef CONFIG_PM
-	.pm =		&usb_device_pm_ops,
-#endif
 };
 
 
@@ -618,12 +541,6 @@ struct usb_device *usb_alloc_dev(struct usb_device *parent,
 	dev->parent = parent;
 	INIT_LIST_HEAD(&dev->filelist);
 
-#ifdef	CONFIG_PM
-	pm_runtime_set_autosuspend_delay(&dev->dev,
-			usb_autosuspend_delay * 1000);
-	dev->connect_time = jiffies;
-	dev->active_duration = -jiffies;
-#endif
 
 	dev->authorized = usb_dev_authorized(dev, usb_hcd);
 	if (!root_hub)
