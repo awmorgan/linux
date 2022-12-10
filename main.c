@@ -10,21 +10,11 @@ typedef __UINT64_TYPE__ uint64;
 typedef uint8 bool;
 enum { true = 1, false = 0 };
 
+#undef offsetof
+#define offsetof(TYPE, MEMBER) __builtin_offsetof(TYPE, MEMBER)
+
 #define _TOKEN_PASTE(x, y) x##y
 #define TOKEN_PASTE(x, y) _TOKEN_PASTE(x, y)
-
-#define compiler_assert_nr(e, nr)                                          \
-	static void TOKEN_PASTE(TOKEN_PASTE(compiler_assert, __COUNTER__), \
-				__LINE__)(void)                            \
-	{                                                                  \
-		switch ((nr)) {                                            \
-		case (nr):                                                 \
-			break;                                             \
-		case (e) ? (nr)-1:                                         \
-			(nr)                                               \
-				: break;                                   \
-		}                                                          \
-	}
 
 #define compiler_assert_nr_func(e, nr)   \
 	{                                \
@@ -36,63 +26,21 @@ enum { true = 1, false = 0 };
 				: break; \
 		}                        \
 	}
+#define compiler_print_nr_func(nr, f) compiler_assert_nr_func(0, nr, f)
+
+#define compiler_assert_nr(e, nr)                                   \
+	static void TOKEN_PASTE(compiler_assert, __COUNTER__)(void) \
+		compiler_assert_nr_func(e, nr)
 
 #define compiler_print_nr(nr, f) compiler_assert_nr(0, nr, f)
 
-
 // 8ed710da2873c2aeb3bb805864a699affaf1d03b
 
-/* SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note */
-/*
- * This file holds USB constants and structures that are needed for
- * USB device APIs.  These are used by the USB device model, which is
- * defined in chapter 9 of the USB 2.0 specification and in the
- * Wireless USB 1.0 (spread around).  Linux has several APIs in C that
- * need these:
- *
- * - the master/host side Linux-USB kernel driver API;
- * - the "usbfs" user space API; and
- * - the Linux "gadget" slave/device/peripheral side driver API.
- *
- * USB 2.0 adds an additional "On The Go" (OTG) mode, which lets systems
- * act either as a USB master/host or as a USB slave/device.  That means
- * the master and slave side APIs benefit from working well together.
- *
- * There's also "Wireless USB", using low power short range radios for
- * peripheral interconnection but otherwise building on the USB framework.
- *
- * Note all descriptors are declared '__attribute__((packed))' so that:
- *
- * [a] they never get padded, either internally (USB spec writers
- *     probably handled that) or externally;
- *
- * [b] so that accessing bigger-than-a-bytes fields will never
- *     generate bus errors on any platform, even when the location of
- *     its descriptor inside a bundle isn't "naturally aligned", and
- *
- * [c] for consistency, removing all doubt even when it appears to
- *     someone that the two other points are non-issues for that
- *     particular descriptor type.
-//  */
 
-// #ifndef _UAPI__LINUX_USB_CH9_H
-// #define _UAPI__LINUX_USB_CH9_H
-
-// #include <linux/types.h>	/* __u8 etc */
-// #include <asm/byteorder.h>	/* le16_to_cpu */
-
-// /*-------------------------------------------------------------------------*/
-
-// /* CONTROL REQUEST SUPPORT */
-
-// /*
-//  * USB directions
-//  *
-//  * This bit flag is used in endpoint descriptors' bEndpointAddress field.
-//  * It's also one of three fields in control requests bRequestType.
-//  */
-// #define USB_DIR_OUT			0		/* to device */
-// #define USB_DIR_IN			0x80		/* to host */
+enum {
+	// endpoint_address and request_type
+	USB_DIR_OUT = 0,
+	USB_DIR_IN = 0x80,
 
 // /*
 //  * USB types, the second of three bRequestType fields
@@ -102,6 +50,7 @@ enum { true = 1, false = 0 };
 // #define USB_TYPE_CLASS			(0x01 << 5)
 // #define USB_TYPE_VENDOR			(0x02 << 5)
 // #define USB_TYPE_RESERVED		(0x03 << 5)
+};
 
 // /*
 //  * USB recipients, the third of three bRequestType fields
@@ -443,26 +392,31 @@ enum { true = 1, false = 0 };
 
 // #define USB_DT_INTERFACE_SIZE		9
 
-// /*-------------------------------------------------------------------------*/
+typedef struct __attribute__((packed)) {
+	uint8 length;
+	uint8 descriptor_type;
 
-// /* USB_DT_ENDPOINT: Endpoint descriptor */
-struct usb_endpoint_descriptor {
-	uint8 bLength;
-	uint8 bDescriptorType;
+	uint8 endpoint_address;
+	uint8 attributes;
+	uint16 max_packet_size;
+	uint8 interval;
+} usb_endpoint_descriptor;
+compiler_assert_nr(sizeof(usb_endpoint_descriptor) == 7,
+		   sizeof(usb_endpoint_descriptor));
 
-	uint8 bEndpointAddress;
-	uint8 bmAttributes;
-	uint16 wMaxPacketSize;
-	uint8 bInterval;
+typedef struct __attribute__((packed)) {
+	uint8 length;
+	uint8 descriptor_type;
 
-	/* NOTE:  these two are _only_ in audio endpoints. */
-	/* use USB_DT_ENDPOINT*_SIZE in bLength, not sizeof. */
-	uint8 bRefresh;
-	uint8 bSynchAddress;
-} __attribute__((packed));
-
-#define USB_DT_ENDPOINT_SIZE 7
-// #define USB_DT_ENDPOINT_AUDIO_SIZE	9	/* Audio extension */
+	uint8 endpoint_address;
+	uint8 attributes;
+	uint16 max_packet_size;
+	uint8 interval;
+	uint8 refresh;
+	uint8 sync_address;
+} usb_audio_endpoint_descriptor;
+compiler_assert_nr(sizeof(usb_audio_endpoint_descriptor) == 9,
+		   sizeof(usb_audio_endpoint_descriptor));
 
 // /*
 //  * Endpoints
@@ -1305,11 +1259,11 @@ void usb_set_autosuspend_delay(int delay_in_seconds)
 	usb_autosuspend_delay = delay_in_seconds;
 }
 
-static bool match_endpoint(struct usb_endpoint_descriptor *epd,
-			   struct usb_endpoint_descriptor **bulk_in,
-			   struct usb_endpoint_descriptor **bulk_out,
-			   struct usb_endpoint_descriptor **int_in,
-			   struct usb_endpoint_descriptor **int_out)
+static bool match_endpoint(usb_endpoint_descriptor *epd,
+			   usb_endpoint_descriptor **bulk_in,
+			   usb_endpoint_descriptor **bulk_out,
+			   usb_endpoint_descriptor **int_in,
+			   usb_endpoint_descriptor **int_out)
 {
 #if 0
 	switch (usb_endpoint_type(epd)) {
@@ -2322,6 +2276,5 @@ MODULE_LICENSE("GPL");
 #endif
 int main(int argc, char *argv[])
 {
-	compiler_assert_nr_func(sizeof(int) == 4, sizeof(int), main_c);
 	return 0;
 }
