@@ -22,5 +22,25 @@
 			],
 			"group": "build",
 		},
+		{
+			"type": "cppbuild",
+			"label": "main",
+			"command": "clang",
+			"args": [
+				"main.c",
+				"-o main",
+				"-Wall",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}",
+			},
+			"presentation": {
+				"clear": true,
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build",
+		},
 	]
 }
