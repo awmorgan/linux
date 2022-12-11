@@ -30,6 +30,13 @@
 			"args": [
 				"main.c",
 				"-Wall",
+				"-I${workspaceFolder}/include",
+				"-I${workspaceFolder}/include/uapi",
+				"-I${workspaceFolder}/arch/arm64/include",
+				"-I${workspaceFolder}/arch/arm64/include/uapi",
+				"-I${workspaceFolder}/arch/arm64/include/generated",
+				"-I${workspaceFolder}/arch/arm64/include/generated/uapi",
+				"-nostdinc"
 			],
 			"options": {
 				"cwd": "${workspaceFolder}",
