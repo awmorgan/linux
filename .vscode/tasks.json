@@ -28,6 +28,7 @@
 			"label": "main",
 			"command": "clang",
 			"args": [
+				"drivers/scsi/scsi.c",
 				"main.c",
 				"-Wall",
 				"-I${workspaceFolder}/include",
@@ -36,7 +37,12 @@
 				"-I${workspaceFolder}/arch/arm64/include/uapi",
 				"-I${workspaceFolder}/arch/arm64/include/generated",
 				"-I${workspaceFolder}/arch/arm64/include/generated/uapi",
-				"-nostdinc"
+				"-nostdinc",
+				"-D__KERNEL__",
+				"2>&1",
+				"|",
+				"tee",
+				"make.log",
 			],
 			"options": {
 				"cwd": "${workspaceFolder}",
