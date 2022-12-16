@@ -28,15 +28,21 @@
 			"label": "main",
 			"command": "clang",
 			"args": [
-				"main.c",
+				"${workspaceFolder}/myusb/main.c",
 				"-Wall",
+				"-I${workspaceFolder}/myusb/include",
+				"-I${workspaceFolder}/myusb/include/generated",
+				"-I${workspaceFolder}/include",
+				"-I${workspaceFolder}/myusb/include/uapi",
+				"-I${workspaceFolder}/myusb/include/generated/uapi",
+				"-I${workspaceFolder}/include/uapi",
 				"2>&1",
 				"|",
 				"tee",
 				"make.log",
 			],
 			"options": {
-				"cwd": "${workspaceFolder}/myusb",
+				"cwd": "${workspaceFolder}",
 			},
 			"presentation": {
 				"clear": true,
