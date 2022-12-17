@@ -12,16 +12,16 @@
 // -I./include/uapi
 // -I./include/generated/uapi
 
-#define __KERNEL__
-#undef __weak
+// #define __KERNEL__
+// #undef __weak
 
-#include "linux/compiler-version.h"
-#include "linux/kconfig.h"
-#include "linux/compiler_types.h"
+// #include "linux/compiler-version.h"
+// #include "linux/kconfig.h"
+// #include "linux/compiler_types.h"
 
 
-#include "../drivers/scsi/scsi.c"
-
+// #include "../drivers/scsi/scsi.c"
+#include "../drivers/scsi/scsi.i"
 
 int main(int argc, char *argv[])
 {
