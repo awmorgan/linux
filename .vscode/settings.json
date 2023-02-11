@@ -22,5 +22,7 @@
                 "arch/x86": true,
                 "arch/xtensa": true,
                 "tools": true,
+                "drivers/soundwire": true,
+                
         }
 }
