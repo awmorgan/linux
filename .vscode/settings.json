@@ -23,6 +23,10 @@
                 "arch/xtensa": true,
                 "tools": true,
                 "drivers/soundwire": true,
-                
+                "drivers/usb/dwc3": true,
+                "drivers/usb/cdns3/cdnsp-pci.c": true,
+                "all_functions.h": true,
+                "global_functions.h": true,
+                "usb_global_functions.h": true,
         }
 }
