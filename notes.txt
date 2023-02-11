@@ -30,4 +30,8 @@ after you have built the kernel you can run this command to convert the dtb to a
 
         note the above output did not contain cdns usb
 
+found usb dts settings in this file:
+
+        arch/arm64/boot/dts/ti/k3-j721e-main.dtsi
+
 

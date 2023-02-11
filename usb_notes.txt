@@ -1,0 +1,13 @@
+found usb dts settings in this file:
+
+        arch/arm64/boot/dts/ti/k3-j721e-main.dtsi
+
+these are the compatible strings and drivers in the dtsi file:
+
+        compatible = "ti,j721e-usb";
+                drivers/usb/cdns3/cdns3-ti.c
+
+        compatible = "cdns,usb3";
+                drivers/usb/cdns3/cdns3-plat.c
+
+
