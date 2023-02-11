@@ -22,4 +22,9 @@ real    14m7.291s
 user    43m46.464s
 sys     6m0.026s
 
+size:
+232M Feb 10 19:05 vmlinux
+
+after you have built the kernel you can run this command to convert the dtb to a dts file:
+/Volumes/git/linux (arm64_k3_trimdown/0)$ ./scripts/dtc/dtc -I dtb -O dts -o out.dts arch/arm64/boot/dts/ti/k3-j721s2-common-proc-board.dtb
 
