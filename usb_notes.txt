@@ -22,3 +22,6 @@ made list of global functions by using gdb:
         info functions
 
         usb_global_functions.txt is derived from this list
+
+
+->cdns3_plat_probe

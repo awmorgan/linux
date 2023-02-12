@@ -45,3 +45,8 @@ created global_functions.txt with
      grep -v static gdb.txt >out.txt
      grep . out.txt >global_functions.txt
 
+removed a bunch more config options in these two commits:
+        a5433f69deaf578738f33d2a3ab96e4da9b42af9
+        737e90c8be3eb952645fb4af2cfbacbae2b33a3c
+
+        86M Feb 11 18:59 vmlinux
