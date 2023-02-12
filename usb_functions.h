@@ -1,8 +1,29 @@
+File drivers/usb/cdns3/cdns3-plat.c:
+331:	static void cdns3_driver_exit(void);
+331:	static int cdns3_driver_init(void);
+52:	static int cdns3_plat_probe(struct platform_device *);
+178:	static int cdns3_plat_remove(struct platform_device *);
+40:	static void set_phy_power_off(struct cdns *);
+25:	static int set_phy_power_on(struct cdns *);
+
+File drivers/usb/cdns3/cdns3-ti.c:
+231:	static void cdns_ti_driver_exit(void);
+231:	static int cdns_ti_driver_init(void);
+87:	static int cdns_ti_probe(struct platform_device *);
+202:	static int cdns_ti_remove(struct platform_device *);
+193:	static int cdns_ti_remove_core(struct device *, void *);
 
 File drivers/usb/cdns3/core.c:
 297:	int cdns_hw_role_switch(struct cdns *);
 427:	int cdns_init(struct cdns *);
 497:	int cdns_remove(struct cdns *);
+262:	static int cdns_idle_role_start(struct cdns *);
+267:	static void cdns_idle_role_stop(struct cdns *);
+341:	static enum usb_role cdns_role_get(struct usb_role_switch *);
+357:	static int cdns_role_set(struct usb_role_switch *, enum usb_role);
+28:	static int cdns_role_start(struct cdns *, enum usb_role);
+405:	static irqreturn_t cdns_wakeup_irq(int, void *);
+
 File drivers/usb/cdns3/drd.c:
 106:	void cdns_clear_vbus(struct cdns *);
 475:	int cdns_drd_exit(struct cdns *);
@@ -18,8 +39,19 @@ File drivers/usb/cdns3/drd.c:
 132:	bool cdns_is_host(struct cdns *);
 484:	bool cdns_power_is_lost(struct cdns *);
 119:	void cdns_set_vbus(struct cdns *);
+349:	static irqreturn_t cdns_drd_irq(int, void *);
+332:	static irqreturn_t cdns_drd_thread_irq(int, void *);
+
+File drivers/usb/cdns3/gadget-export.h:
+30:	static int cdns3_gadget_init(struct cdns *);
+
 File drivers/usb/cdns3/host.c:
 127:	int cdns_host_init(struct cdns *);
+60:	static int __cdns_host_init(struct cdns *);
+119:	static void cdns_host_exit(struct cdns *);
+27:	static void xhci_cdns3_plat_start(struct usb_hcd *);
+48:	static int xhci_cdns3_resume_quirk(struct usb_hcd *);
+
 File drivers/usb/common/common.c:
 276:	enum usb_dr_mode of_usb_get_dr_mode_by_phy(struct device_node *, int);
 328:	bool of_usb_host_tpl_support(struct device_node *);
@@ -34,30 +66,56 @@ File drivers/usb/common/common.c:
 43:	const char *usb_otg_state_string(enum usb_otg_state);
 91:	const char *usb_speed_string(enum usb_device_speed);
 154:	const char *usb_state_string(enum usb_device_state);
-File drivers/usb/common/ulpi.c:
-153:	int __ulpi_register_driver(struct ulpi_driver *, struct module *);
-23:	int ulpi_read(struct ulpi *, u8);
-321:	struct ulpi *ulpi_register_interface(struct device *, const struct ulpi_ops *);
-171:	void ulpi_unregister_driver(struct ulpi_driver *);
-350:	void ulpi_unregister_interface(struct ulpi *);
-29:	int ulpi_write(struct ulpi *, u8, u8);
+426:	static void usb_common_exit(void);
+419:	static int usb_common_init(void);
+
 File drivers/usb/core/buffer.c:
 115:	void *hcd_buffer_alloc(struct usb_bus *, size_t, gfp_t, dma_addr_t *);
 65:	int hcd_buffer_create(struct usb_hcd *);
 97:	void hcd_buffer_destroy(struct usb_hcd *);
 144:	void hcd_buffer_free(struct usb_bus *, size_t, void *, dma_addr_t);
 33:	void usb_init_pool_max(void);
+
 File drivers/usb/core/config.c:
 825:	void usb_destroy_configuration(struct usb_device *);
 978:	int usb_get_bos_descriptor(struct usb_device *);
 861:	int usb_get_configuration(struct usb_device *);
 959:	void usb_release_bos_descriptor(struct usb_device *);
 484:	void usb_release_interface_cache(struct kref *);
+
+File drivers/usb/core/devices.c:
+390:	static ssize_t usb_device_dump(char **, size_t *, loff_t *, loff_t *, struct usb_device *, struct usb_bus *, int, int, int);
+510:	static ssize_t usb_device_read(struct file *, char *, size_t, loff_t *);
+
 File drivers/usb/core/devio.c:
 2906:	void usb_devio_cleanup(void);
 2880:	int usb_devio_init(void);
 748:	void usbfs_notify_resume(struct usb_device *);
 743:	void usbfs_notify_suspend(struct usb_device *);
+613:	static void async_completed(struct urb *);
+869:	static int check_ctrlrecip(struct usb_dev_state *, unsigned int, unsigned int, unsigned int);
+770:	static int claimintf(struct usb_dev_state *, unsigned int);
+186:	static void dec_usb_memory_use_count(struct usb_memory *, int *);
+653:	static void destroy_async(struct usb_dev_state *, struct list_head *);
+707:	static void driver_disconnect(struct usb_interface *);
+701:	static int driver_probe(struct usb_interface *, const struct usb_device_id *);
+737:	static int driver_resume(struct usb_interface *);
+732:	static int driver_suspend(struct usb_interface *, pm_message_t);
+406:	static void free_async(struct async *);
+937:	static int parse_usbdevfs_streams(struct usb_dev_state *, struct usbdevfs_streams *, unsigned int *, unsigned int *, struct usb_host_endpoint ***, struct usb_interface **);
+2031:	static int processcompl(struct async *, void **);
+524:	static void snoop_urb_data(struct urb *, unsigned int);
+2802:	static long usbdev_ioctl(struct file *, unsigned int, unsigned long);
+229:	static int usbdev_mmap(struct file *, struct vm_area_struct *);
+2861:	static int usbdev_notify(struct notifier_block *, unsigned long, void *);
+1023:	static int usbdev_open(struct inode *, struct file *);
+2813:	static __poll_t usbdev_poll(struct file *, struct poll_table_struct *);
+301:	static ssize_t usbdev_read(struct file *, char *, size_t, loff_t *);
+1080:	static int usbdev_release(struct inode *, struct file *);
+217:	static void usbdev_vm_close(struct vm_area_struct *);
+207:	static void usbdev_vm_open(struct vm_area_struct *);
+1118:	static void usbfs_blocking_completion(struct urb *);
+
 File drivers/usb/core/driver.c:
 1096:	void usb_deregister(struct usb_driver *);
 1018:	void usb_deregister_device_driver(struct usb_device_driver *);
@@ -75,18 +133,46 @@ File drivers/usb/core/driver.c:
 114:	ssize_t usb_show_dynids(struct usb_dynids *, char *);
 42:	ssize_t usb_store_new_id(struct usb_dynids *, const struct usb_device_id *, struct device_driver *, const char *, size_t);
 1200:	void usb_unbind_and_rebind_marked_interfaces(struct usb_device *);
+943:	static int __usb_bus_reprobe_drivers(struct device *, void *);
+131:	static ssize_t new_id_show(struct device_driver *, char *);
+138:	static ssize_t new_id_store(struct device_driver *, const char *, size_t);
+178:	static ssize_t remove_id_show(struct device_driver *, char *);
+150:	static ssize_t remove_id_store(struct device_driver *, const char *, size_t);
+855:	static int usb_device_match(struct device *, struct device_driver *);
+249:	static int usb_probe_device(struct device *);
+318:	static int usb_probe_interface(struct device *);
+902:	static int usb_uevent(struct device *, struct kobj_uevent_env *);
+303:	static int usb_unbind_device(struct device *);
+428:	static int usb_unbind_interface(struct device *);
+
 File drivers/usb/core/endpoint.c:
 149:	int usb_create_ep_devs(struct device *, struct usb_host_endpoint *, struct usb_device *);
 183:	void usb_remove_ep_devs(struct usb_host_endpoint *);
+47:	static ssize_t bEndpointAddress_show(struct device *, struct device_attribute *, char *);
+49:	static ssize_t bInterval_show(struct device *, struct device_attribute *, char *);
+46:	static ssize_t bLength_show(struct device *, struct device_attribute *, char *);
+48:	static ssize_t bmAttributes_show(struct device *, struct device_attribute *, char *);
+102:	static ssize_t direction_show(struct device *, struct device_attribute *, char *);
+137:	static void ep_device_release(struct device *);
+83:	static ssize_t interval_show(struct device *, struct device_attribute *, char *);
+59:	static ssize_t type_show(struct device *, struct device_attribute *, char *);
+51:	static ssize_t wMaxPacketSize_show(struct device *, struct device_attribute *, char *);
+
 File drivers/usb/core/file.c:
 230:	void usb_deregister_dev(struct usb_interface *, struct usb_class_driver *);
 132:	void usb_major_cleanup(void);
 120:	int usb_major_init(void);
 156:	int usb_register_dev(struct usb_interface *, struct usb_class_driver *);
+65:	static char *usb_devnode(const struct device *, umode_t *);
+34:	static int usb_open(struct inode *, struct file *);
+
 File drivers/usb/core/generic.c:
 56:	int usb_choose_configuration(struct usb_device *);
 253:	void usb_generic_driver_disconnect(struct usb_device *);
 226:	int usb_generic_driver_probe(struct usb_device *);
+198:	static int __check_for_non_generic_match(struct device_driver *, void *);
+211:	static bool usb_generic_driver_match(struct usb_device *);
+
 File drivers/usb/core/hcd.c:
 2567:	struct usb_hcd *__usb_create_hcd(const struct hc_driver *, struct device *, struct device *, const char *, struct usb_hcd *);
 2811:	int usb_add_hcd(struct usb_hcd *, unsigned int, unsigned long);
@@ -122,6 +208,15 @@ File drivers/usb/core/hcd.c:
 1332:	void usb_hcd_unmap_urb_setup_for_dma(struct usb_hcd *, struct urb *);
 2710:	void usb_put_hcd(struct usb_hcd *);
 3032:	void usb_remove_hcd(struct usb_hcd *);
+1644:	static void __usb_hcd_giveback_urb(struct urb *);
+2493:	static void hcd_died_work(struct work_struct *);
+982:	static int register_root_hub(struct usb_hcd *);
+803:	static void rh_timer_func(struct timer_list *);
+1589:	static int unlink1(struct usb_hcd *, struct urb *, int);
+1688:	static void usb_giveback_urb_bh(struct tasklet_struct *);
+2733:	static int usb_hcd_request_irqs(struct usb_hcd *, unsigned int, unsigned long);
+2787:	static void usb_stop_hcd(struct usb_hcd *);
+
 File drivers/usb/core/hub.c:
 4582:	int hub_port_debounce(struct usb_hub *, int, bool);
 2644:	int usb_authorize_device(struct usb_device *);
@@ -157,6 +252,33 @@ File drivers/usb/core/hub.c:
 4494:	int usb_unlocked_disable_lpm(struct usb_device *);
 4500:	void usb_unlocked_enable_lpm(struct usb_device *);
 700:	void usb_wakeup_notification(struct usb_device *, unsigned int);
+5146:	static int descriptors_changed(struct usb_device *, struct usb_device_descriptor *, struct usb_host_bos *);
+2701:	static enum usb_ssp_rate get_port_ssp_rate(struct usb_device *, u32);
+1028:	static void hub_activate(struct usb_hub *, enum hub_activation_type);
+1715:	static void hub_disconnect(struct usb_interface *);
+5715:	static void hub_event(struct work_struct *);
+591:	static int hub_ext_port_status(struct usb_hub *, int, int, u16 *, u16 *, u32 *);
+936:	static int hub_hub_status(struct usb_hub *, u16 *, u16 *);
+1301:	static void hub_init_func2(struct work_struct *);
+1308:	static void hub_init_func3(struct work_struct *);
+1910:	static int hub_ioctl(struct usb_interface *, unsigned int, void *);
+722:	static void hub_irq(struct urb *);
+4530:	static int hub_port_disable(struct usb_hub *, int, int);
+4718:	static int hub_port_init(struct usb_hub *, struct usb_device *, int, int);
+2946:	static int hub_port_reset(struct usb_hub *, int, struct usb_device *, unsigned int, bool);
+1367:	static int hub_post_reset(struct usb_interface *);
+5099:	static unsigned int hub_power_remaining(struct usb_hub *);
+1356:	static int hub_pre_reset(struct usb_interface *);
+1783:	static int hub_probe(struct usb_interface *, const struct usb_device_id *);
+1319:	static void hub_quiesce(struct usb_hub *, enum hub_quiescing_type);
+627:	static void hub_resubmit_irq_urb(struct usb_hub *);
+649:	static void hub_retry_irq_urb(struct timer_list *);
+786:	static void hub_tt_work(struct work_struct *);
+657:	static void kick_hub_wq(struct usb_hub *);
+481:	static void led_work(struct work_struct *);
+2021:	static void recursively_mark_NOTATTACHED(struct usb_device *);
+318:	static void usb_set_lpm_parameters(struct usb_device *);
+
 File drivers/usb/core/message.c:
 2285:	int cdc_parse_cdc_header(struct usb_cdc_parsed_header *, struct usb_interface *, u8 *, int);
 1811:	void usb_authorize_interface(struct usb_interface *);
@@ -186,6 +308,17 @@ File drivers/usb/core/message.c:
 501:	int usb_sg_init(struct usb_sg_request *, struct usb_device *, unsigned int, unsigned int, struct scatterlist *, int, size_t, gfp_t);
 650:	void usb_sg_wait(struct usb_sg_request *);
 967:	int usb_string(struct usb_device *, int, char *, size_t);
+1896:	static void __usb_queue_reset_device(struct work_struct *);
+2196:	static void driver_set_config_work(struct work_struct *);
+404:	static void sg_complete(struct urb *);
+34:	static void usb_api_blocking_completion(struct urb *);
+1361:	static void usb_disable_device_endpoints(struct usb_device *, int);
+832:	static int usb_get_string(struct usb_device *, unsigned short, unsigned char, void *, int);
+1822:	static int usb_if_uevent(struct device *, struct kobj_uevent_env *);
+1772:	static void usb_release_interface(struct device *);
+49:	static int usb_start_wait_urb(struct urb *, int, int *);
+872:	static int usb_string_sub(struct usb_device *, unsigned int, unsigned int, unsigned char *);
+
 File drivers/usb/core/notify.c:
 60:	void usb_notify_add_bus(struct usb_bus *);
 49:	void usb_notify_add_device(struct usb_device *);
@@ -193,10 +326,12 @@ File drivers/usb/core/notify.c:
 54:	void usb_notify_remove_device(struct usb_device *);
 29:	void usb_register_notify(struct notifier_block *);
 42:	void usb_unregister_notify(struct notifier_block *);
+
 File drivers/usb/core/of.c:
 25:	struct device_node *usb_of_get_device_node(struct usb_device *, int);
 92:	struct device_node *usb_of_get_interface_node(struct usb_device *, u8, u8);
 57:	bool usb_of_has_combined_node(struct usb_device *);
+
 File drivers/usb/core/phy.c:
 49:	struct usb_phy_roothub *usb_phy_roothub_alloc(struct device *);
 154:	int usb_phy_roothub_calibrate(struct usb_phy_roothub *);
@@ -207,19 +342,99 @@ File drivers/usb/core/phy.c:
 227:	int usb_phy_roothub_resume(struct device *, struct usb_phy_roothub *);
 126:	int usb_phy_roothub_set_mode(struct usb_phy_roothub *, enum phy_mode);
 214:	int usb_phy_roothub_suspend(struct device *, struct usb_phy_roothub *);
+
 File drivers/usb/core/port.c:
 669:	int usb_hub_create_port_device(struct usb_hub *, int);
 759:	void usb_hub_remove_port_device(struct usb_hub *, int);
+138:	static ssize_t connect_type_show(struct device *, struct device_attribute *, char *);
+643:	static int connector_bind(struct device *, struct device *, void *);
+658:	static void connector_unbind(struct device *, struct device *, void *);
+47:	static ssize_t disable_show(struct device *, struct device_attribute *, char *);
+82:	static ssize_t disable_store(struct device *, struct device_attribute *, const char *, size_t);
+21:	static ssize_t early_stop_show(struct device *, struct device_attribute *, char *);
+29:	static ssize_t early_stop_store(struct device *, struct device_attribute *, const char *, size_t);
+502:	static void link_peers_report(struct usb_port *, struct usb_port *);
+129:	static ssize_t location_show(struct device *, struct device_attribute *, char *);
+557:	static int match_location(struct usb_device *, void *);
+163:	static ssize_t over_current_count_show(struct device *, struct device_attribute *, char *);
+172:	static ssize_t quirks_show(struct device *, struct device_attribute *, char *);
+180:	static ssize_t quirks_store(struct device *, struct device_attribute *, const char *, size_t);
+194:	static ssize_t usb3_lpm_permit_show(struct device *, struct device_attribute *, char *);
+215:	static ssize_t usb3_lpm_permit_store(struct device *, struct device_attribute *, const char *, size_t);
+294:	static void usb_port_device_release(struct device *);
+406:	static void usb_port_shutdown(struct device *);
+
 File drivers/usb/core/quirks.c:
 709:	void usb_detect_interface_quirks(struct usb_device *);
 681:	void usb_detect_quirks(struct usb_device *);
 579:	bool usb_endpoint_is_ignored(struct usb_device *, struct usb_host_interface *, struct usb_endpoint_descriptor *);
 722:	void usb_release_quirk_list(void);
+28:	static int quirks_param_set(const char *, const struct kernel_param *);
+639:	static u32 usb_detect_static_quirks(struct usb_device *, const struct usb_device_id *);
+
 File drivers/usb/core/sysfs.c:
 1021:	int usb_create_sysfs_dev_files(struct usb_device *);
 1241:	void usb_create_sysfs_intf_files(struct usb_interface *);
 1050:	void usb_remove_sysfs_dev_files(struct usb_device *);
 1258:	void usb_remove_sysfs_intf_files(struct usb_interface *);
+914:	static ssize_t authorized_default_show(struct device *, struct device_attribute *, char *);
+925:	static ssize_t authorized_default_store(struct device *, struct device_attribute *, const char *, size_t);
+727:	static ssize_t authorized_show(struct device *, struct device_attribute *, char *);
+739:	static ssize_t authorized_store(struct device *, struct device_attribute *, const char *, size_t);
+265:	static ssize_t avoid_reset_quirk_show(struct device *, struct device_attribute *, char *);
+274:	static ssize_t avoid_reset_quirk_store(struct device *, struct device_attribute *, const char *, size_t);
+1095:	static ssize_t bAlternateSetting_show(struct device *, struct device_attribute *, char *);
+91:	static ssize_t bConfigurationValue_show(struct device *, struct device_attribute *, char *);
+93:	static ssize_t bConfigurationValue_store(struct device *, struct device_attribute *, const char *, size_t);
+719:	static ssize_t bDeviceClass_show(struct device *, struct device_attribute *, char *);
+721:	static ssize_t bDeviceProtocol_show(struct device *, struct device_attribute *, char *);
+720:	static ssize_t bDeviceSubClass_show(struct device *, struct device_attribute *, char *);
+1097:	static ssize_t bInterfaceClass_show(struct device *, struct device_attribute *, char *);
+1094:	static ssize_t bInterfaceNumber_show(struct device *, struct device_attribute *, char *);
+1099:	static ssize_t bInterfaceProtocol_show(struct device *, struct device_attribute *, char *);
+1098:	static ssize_t bInterfaceSubClass_show(struct device *, struct device_attribute *, char *);
+723:	static ssize_t bMaxPacketSize0_show(struct device *, struct device_attribute *, char *);
+52:	static ssize_t bMaxPower_show(struct device *, struct device_attribute *, char *);
+722:	static ssize_t bNumConfigurations_show(struct device *, struct device_attribute *, char *);
+1096:	static ssize_t bNumEndpoints_show(struct device *, struct device_attribute *, char *);
+49:	static ssize_t bNumInterfaces_show(struct device *, struct device_attribute *, char *);
+705:	static ssize_t bcdDevice_show(struct device *, struct device_attribute *, char *);
+50:	static ssize_t bmAttributes_show(struct device *, struct device_attribute *, char *);
+203:	static ssize_t busnum_show(struct device *, struct device_attribute *, char *);
+71:	static ssize_t configuration_show(struct device *, struct device_attribute *, char *);
+829:	static umode_t dev_string_attrs_are_visible(struct kobject *, struct attribute *, int);
+213:	static ssize_t devnum_show(struct device *, struct device_attribute *, char *);
+223:	static ssize_t devpath_show(struct device *, struct device_attribute *, char *);
+113:	static ssize_t devspec_show(struct device *, struct device_attribute *, char *);
+1075:	static ssize_t iad_bFirstInterface_show(struct device *, struct device_attribute *, char *);
+1077:	static ssize_t iad_bFunctionClass_show(struct device *, struct device_attribute *, char *);
+1079:	static ssize_t iad_bFunctionProtocol_show(struct device *, struct device_attribute *, char *);
+1078:	static ssize_t iad_bFunctionSubClass_show(struct device *, struct device_attribute *, char *);
+1076:	static ssize_t iad_bInterfaceCount_show(struct device *, struct device_attribute *, char *);
+704:	static ssize_t idProduct_show(struct device *, struct device_attribute *, char *);
+703:	static ssize_t idVendor_show(struct device *, struct device_attribute *, char *);
+955:	static ssize_t interface_authorized_default_show(struct device *, struct device_attribute *, char *);
+971:	static ssize_t interface_authorized_default_store(struct device *, struct device_attribute *, const char *, size_t);
+1163:	static ssize_t interface_authorized_show(struct device *, struct device_attribute *, char *);
+1174:	static ssize_t interface_authorized_store(struct device *, struct device_attribute *, const char *, size_t);
+1101:	static ssize_t interface_show(struct device *, struct device_attribute *, char *);
+1219:	static umode_t intf_assoc_attrs_are_visible(struct kobject *, struct attribute *, int);
+305:	static ssize_t ltm_capable_show(struct device *, struct device_attribute *, char *);
+142:	static ssize_t manufacturer_show(struct device *, struct device_attribute *, char *);
+245:	static ssize_t maxchild_show(struct device *, struct device_attribute *, char *);
+1115:	static ssize_t modalias_show(struct device *, struct device_attribute *, char *);
+141:	static ssize_t product_show(struct device *, struct device_attribute *, char *);
+255:	static ssize_t quirks_show(struct device *, struct device_attribute *, char *);
+862:	static ssize_t read_descriptors(struct file *, struct kobject *, struct bin_attribute *, char *, loff_t, size_t);
+759:	static ssize_t remove_store(struct device *, struct device_attribute *, const char *, size_t);
+183:	static ssize_t rx_lanes_show(struct device *, struct device_attribute *, char *);
+143:	static ssize_t serial_show(struct device *, struct device_attribute *, char *);
+145:	static ssize_t speed_show(struct device *, struct device_attribute *, char *);
+1142:	static ssize_t supports_autosuspend_show(struct device *, struct device_attribute *, char *);
+193:	static ssize_t tx_lanes_show(struct device *, struct device_attribute *, char *);
+295:	static ssize_t urbnum_show(struct device *, struct device_attribute *, char *);
+233:	static ssize_t version_show(struct device *, struct device_attribute *, char *);
+
 File drivers/usb/core/urb.c:
 71:	struct urb *usb_alloc_urb(int, gfp_t);
 1048:	int usb_anchor_empty(struct usb_anchor *);
@@ -245,6 +460,8 @@ File drivers/usb/core/urb.c:
 782:	void usb_unpoison_urb(struct urb *);
 225:	int usb_urb_ep_type_check(const struct urb *);
 974:	int usb_wait_anchor_empty_timeout(struct usb_anchor *, unsigned int);
+150:	static void __usb_unanchor_urb(struct urb *, struct usb_anchor *);
+
 File drivers/usb/core/usb.c:
 880:	int __usb_get_extra_descriptor(char *, unsigned int, unsigned char, void **, size_t);
 932:	void *usb_alloc_coherent(struct usb_device *, size_t, gfp_t, dma_addr_t *);
@@ -265,21 +482,26 @@ File drivers/usb/core/usb.c:
 821:	int usb_lock_device_for_reset(struct usb_device *, const struct usb_interface *);
 713:	void usb_put_dev(struct usb_device *);
 752:	void usb_put_intf(struct usb_interface *);
+373:	static int __each_dev(struct device *, void *);
+326:	static int __find_interface(struct device *, const void *);
+966:	static int usb_bus_notify(struct notifier_block *, unsigned long, void *);
+426:	static int usb_dev_uevent(struct device *, struct kobj_uevent_env *);
+508:	static char *usb_devnode(struct device *, umode_t *, kuid_t *, kgid_t *);
+1062:	static void usb_exit(void);
+1007:	static int usb_init(void);
+408:	static void usb_release_dev(struct device *);
+
 File drivers/usb/host/xhci-dbg.c:
 22:	void xhci_dbg_trace(struct xhci_hcd *, void (*)(struct va_format *), const char *, ...);
 13:	char *xhci_get_slot_state(struct xhci_hcd *, struct xhci_container_ctx *);
-File drivers/usb/host/xhci-debugfs.c:
-443:	void xhci_debugfs_create_endpoint(struct xhci_hcd *, struct xhci_virt_device *, int);
-716:	void xhci_debugfs_create_root(void);
-591:	void xhci_debugfs_create_slot(struct xhci_hcd *, int);
-566:	void xhci_debugfs_create_stream_files(struct xhci_hcd *, struct xhci_virt_device *, int);
-704:	void xhci_debugfs_exit(struct xhci_hcd *);
-652:	void xhci_debugfs_init(struct xhci_hcd *);
-470:	void xhci_debugfs_remove_endpoint(struct xhci_hcd *, struct xhci_virt_device *, int);
-721:	void xhci_debugfs_remove_root(void);
-611:	void xhci_debugfs_remove_slot(struct xhci_hcd *, int);
+
+File drivers/usb/host/xhci-debugfs.h:
+126:	static void xhci_debugfs_remove_root(void);
+
 File drivers/usb/host/xhci-ext-caps.c:
 84:	int xhci_ext_cap_init(struct xhci_hcd *);
+23:	static void xhci_intel_unregister_pdev(void *);
+
 File drivers/usb/host/xhci-hub.c:
 460:	int xhci_find_slot_id_by_port(struct usb_hcd *, struct xhci_hcd *, u16);
 655:	struct xhci_hub *xhci_get_rhub(struct usb_hcd *);
@@ -289,6 +511,12 @@ File drivers/usb/host/xhci-hub.c:
 562:	void xhci_ring_device(struct xhci_hcd *, int);
 783:	void xhci_set_link_state(struct xhci_hcd *, struct xhci_port *, u32);
 827:	void xhci_test_and_clear_bit(struct xhci_hcd *, struct xhci_port *, u32);
+720:	static int xhci_enter_test_mode(struct xhci_hcd *, u16, u16, unsigned long *);
+764:	static int xhci_exit_test_mode(struct xhci_hcd *);
+669:	static void xhci_set_port_power(struct xhci_hcd *, struct usb_hcd *, u16, bool, unsigned long *);
+800:	static void xhci_set_remote_wake_mask(struct xhci_hcd *, struct xhci_port *, u16);
+489:	static int xhci_stop_device(struct xhci_hcd *, int, int);
+
 File drivers/usb/host/xhci-mem.c:
 1733:	struct xhci_command *xhci_alloc_command(struct xhci_hcd *, bool, gfp_t);
 1759:	struct xhci_command *xhci_alloc_command_with_ctx(struct xhci_hcd *, bool, gfp_t);
@@ -324,6 +552,33 @@ File drivers/usb/host/xhci-mem.c:
 1628:	void xhci_slot_copy(struct xhci_hcd *, struct xhci_container_ctx *, struct xhci_container_ctx *);
 1544:	void xhci_update_bw_info(struct xhci_hcd *, struct xhci_container_ctx *, struct xhci_input_control_ctx *, struct xhci_virt_device *);
 1778:	void xhci_urb_free_priv(struct urb_priv *);
+1645:	static int scratchpad_alloc(struct xhci_hcd *, gfp_t);
+321:	static int xhci_alloc_segments_for_ring(struct xhci_hcd *, struct xhci_segment **, struct xhci_segment **, unsigned int, unsigned int, enum xhci_ring_type, unsigned int, gfp_t);
+928:	static void xhci_free_virt_devices_depth_first(struct xhci_hcd *, int);
+28:	static struct xhci_segment *xhci_segment_alloc(struct xhci_hcd *, unsigned int, unsigned int, gfp_t);
+2090:	static void xhci_set_hc_event_deq(struct xhci_hcd *);
+2272:	static int xhci_setup_port_arrays(struct xhci_hcd *, gfp_t);
+1932:	static int xhci_test_trb_in_td(struct xhci_hcd *, struct xhci_segment *, union xhci_trb *, union xhci_trb *, dma_addr_t, struct xhci_segment *, char *, int);
+219:	static int xhci_update_stream_segment_mapping(struct xarray *, struct xhci_ring *, struct xhci_segment *, struct xhci_segment *, gfp_t);
+
+File drivers/usb/host/xhci-mvebu.h:
+22:	static int xhci_mvebu_a3700_init_quirk(struct usb_hcd *);
+17:	static int xhci_mvebu_mbus_init_quirk(struct usb_hcd *);
+
+File drivers/usb/host/xhci-plat.c:
+536:	static void xhci_plat_exit(void);
+529:	static int xhci_plat_init(void);
+176:	static int xhci_plat_probe(struct platform_device *);
+77:	static void xhci_plat_quirks(struct device *, struct xhci_hcd *);
+390:	static int xhci_plat_remove(struct platform_device *);
+90:	static int xhci_plat_setup(struct usb_hcd *);
+102:	static int xhci_plat_start(struct usb_hcd *);
+
+File drivers/usb/host/xhci-rcar.h:
+24:	static int xhci_rcar_init_quirk(struct usb_hcd *);
+29:	static int xhci_rcar_resume_quirk(struct usb_hcd *);
+20:	static void xhci_rcar_start(struct usb_hcd *);
+
 File drivers/usb/host/xhci-ring.c:
 3281:	unsigned int count_trbs(u64, u64);
 158:	void inc_deq(struct xhci_hcd *, struct xhci_ring *);
@@ -351,6 +606,33 @@ File drivers/usb/host/xhci-ring.c:
 426:	void xhci_ring_ep_doorbell(struct xhci_hcd *, unsigned int, unsigned int, unsigned int);
 69:	dma_addr_t xhci_trb_virt_to_dma(struct xhci_segment *, union xhci_trb *);
 529:	struct xhci_ring *xhci_triad_to_transfer_ring(struct xhci_hcd *, unsigned int, unsigned int, unsigned int);
+2138:	static int finish_td(struct xhci_hcd *, struct xhci_virt_ep *, struct xhci_ring *, struct xhci_td *, u32);
+1641:	static void handle_cmd_completion(struct xhci_hcd *, struct xhci_event_cmd *);
+3140:	static int prepare_ring(struct xhci_hcd *, struct xhci_ring *, u32, unsigned int, gfp_t);
+3232:	static int prepare_transfer(struct xhci_hcd *, struct xhci_virt_device *, unsigned int, unsigned int, unsigned int, struct urb *, unsigned int, gfp_t);
+4255:	static int queue_command(struct xhci_hcd *, struct xhci_command *, u32, u32, u32, u32, bool);
+3117:	static void queue_trb(struct xhci_hcd *, struct xhci_ring *, bool, u32, u32, u32, u32);
+453:	static void ring_doorbell_for_active_rings(struct xhci_hcd *, unsigned int, unsigned int);
+485:	static struct xhci_virt_ep *xhci_get_virt_ep(struct xhci_hcd *, unsigned int, unsigned int);
+1467:	static void xhci_handle_cmd_config_ep(struct xhci_hcd *, int, u32);
+1059:	static void xhci_handle_cmd_stop_ep(struct xhci_hcd *, int, union xhci_trb *, u32);
+898:	static int xhci_handle_halted_endpoint(struct xhci_hcd *, struct xhci_virt_ep *, struct xhci_td *, enum xhci_ep_reset_type);
+331:	static void xhci_handle_stopped_cmd_ring(struct xhci_hcd *, struct xhci_command *);
+948:	static int xhci_invalidate_cancelled_tds(struct xhci_virt_ep *);
+1145:	static void xhci_kill_ring_urbs(struct xhci_hcd *, struct xhci_ring *);
+801:	static int xhci_td_cleanup(struct xhci_hcd *, struct xhci_td *, struct xhci_ring *, int);
+767:	static void xhci_unmap_td_bounce_buffer(struct xhci_hcd *, struct xhci_ring *, struct xhci_td *);
+2979:	static void xhci_update_erst_dequeue(struct xhci_hcd *, union xhci_trb *);
+
+File drivers/usb/host/xhci-trace.h:
+38:	static void trace_xhci_dbg_address(struct va_format *);
+58:	static void trace_xhci_dbg_cancel_urb(struct va_format *);
+43:	static void trace_xhci_dbg_context_change(struct va_format *);
+63:	static void trace_xhci_dbg_init(struct va_format *);
+48:	static void trace_xhci_dbg_quirks(struct va_format *);
+53:	static void trace_xhci_dbg_reset_ep(struct va_format *);
+68:	static void trace_xhci_dbg_ring_expansion(struct va_format *);
+
 File drivers/usb/host/xhci.c:
 2003:	int xhci_add_endpoint(struct usb_hcd *, struct usb_device *, struct usb_host_endpoint *);
 4082:	int xhci_alloc_dev(struct usb_hcd *, struct usb_device *);
@@ -373,17 +655,68 @@ File drivers/usb/host/xhci.c:
 133:	int xhci_start(struct xhci_hcd *);
 5135:	int xhci_update_hub_device(struct usb_hcd *, struct usb_device *, struct usb_tt *, gfp_t);
 2806:	void xhci_update_tt_active_eps(struct xhci_hcd *, struct xhci_virt_device *, int);
+2732:	static void xhci_add_ep_to_interval_table(struct xhci_hcd *, struct xhci_bw_info *, struct xhci_interval_bw_table *, struct usb_device *, struct xhci_virt_ep *, struct xhci_tt_bw_info *);
+4355:	static int xhci_address_device(struct usb_hcd *, struct usb_device *);
+3511:	static int xhci_alloc_streams(struct usb_hcd *, struct usb_device *, struct usb_host_endpoint **, unsigned int, unsigned int, gfp_t);
+1569:	static int xhci_check_maxpacket(struct xhci_hcd *, unsigned int, unsigned int, struct urb *, gfp_t);
+5409:	static void xhci_clear_tt_buffer_complete(struct usb_hcd *, struct usb_host_endpoint *);
+2919:	static int xhci_configure_endpoint(struct xhci_hcd *, struct usb_device *, struct xhci_command *, bool, bool);
+5123:	static int xhci_disable_usb3_lpm_timeout(struct usb_hcd *, struct usb_device *, enum usb3_link_state);
+3810:	static int xhci_discover_or_reset_device(struct usb_hcd *, struct usb_device *);
+2668:	static void xhci_drop_ep_from_interval_table(struct xhci_hcd *, struct xhci_bw_info *, struct xhci_interval_bw_table *, struct usb_device *, struct xhci_virt_ep *, struct xhci_tt_bw_info *);
+4360:	static int xhci_enable_device(struct usb_hcd *, struct usb_device *);
+5117:	static int xhci_enable_usb3_lpm_timeout(struct usb_hcd *, struct usb_device *, enum usb3_link_state);
+3175:	static void xhci_endpoint_disable(struct usb_hcd *, struct usb_host_endpoint *);
+3227:	static void xhci_endpoint_reset(struct usb_hcd *, struct usb_host_endpoint *);
+3972:	static void xhci_free_dev(struct usb_hcd *, struct usb_device *);
+2312:	static void xhci_free_host_resources(struct xhci_hcd *, struct xhci_input_control_ctx *);
+3678:	static int xhci_free_streams(struct usb_hcd *, struct usb_device *, struct usb_host_endpoint **, unsigned int, gfp_t);
+5237:	static int xhci_get_frame(struct usb_hcd *);
+5562:	static void xhci_hcd_fini(void);
+5529:	static int xhci_hcd_init(void);
+5257:	static void xhci_hcd_init_usb3_data(struct xhci_hcd *, struct usb_hcd *);
+1434:	static int xhci_map_urb_for_dma(struct usb_hcd *, struct urb *, gfp_t);
+614:	static int xhci_run_finished(struct xhci_hcd *);
+5106:	static int xhci_set_usb2_hardware_lpm(struct usb_hcd *, struct usb_device *, int);
+4171:	static int xhci_setup_device(struct usb_hcd *, struct usb_device *, enum xhci_setup_dev);
+732:	static void xhci_stop(struct usb_hcd *);
+1451:	static void xhci_unmap_urb_for_dma(struct usb_hcd *, struct urb *);
+5112:	static int xhci_update_device(struct usb_hcd *, struct usb_device *);
+1786:	static int xhci_urb_dequeue(struct usb_hcd *, struct urb *, int);
+1643:	static int xhci_urb_enqueue(struct usb_hcd *, struct urb *, gfp_t);
+
+File drivers/usb/host/xhci.h:
+1982:	static bool xhci_hcd_is_usb3(struct usb_hcd *);
+
 File drivers/usb/phy/of.c:
 28:	enum usb_phy_interface of_usb_get_phy_mode(struct device_node *);
+
 File drivers/usb/phy/phy-generic.c:
 135:	int usb_gen_phy_init(struct usb_phy *);
 157:	void usb_gen_phy_shutdown(struct usb_phy *);
 206:	int usb_phy_gen_create_phy(struct device *, struct usb_phy_generic *);
 33:	struct platform_device *usb_phy_generic_register(void);
 40:	void usb_phy_generic_unregister(struct platform_device *);
+101:	static irqreturn_t nop_gpio_vbus_thread(int, void *);
+192:	static int nop_set_host(struct usb_otg *, struct usb_bus *);
+173:	static int nop_set_peripheral(struct usb_otg *, struct usb_gadget *);
+46:	static int nop_set_suspend(struct usb_phy *, int);
+364:	static void usb_phy_generic_exit(void);
+358:	static int usb_phy_generic_init(void);
+286:	static int usb_phy_generic_probe(struct platform_device *);
+333:	static int usb_phy_generic_remove(struct platform_device *);
+
+File drivers/usb/phy/phy-ulpi-viewport.c:
+29:	static int ulpi_viewport_read(struct usb_phy *, u32);
+47:	static int ulpi_viewport_write(struct usb_phy *, u32, u32);
+
 File drivers/usb/phy/phy-ulpi.c:
 282:	struct usb_phy *devm_otg_ulpi_create(struct device *, struct usb_phy_io_ops *, unsigned int);
 259:	struct usb_phy *otg_ulpi_create(struct usb_phy_io_ops *, unsigned int);
+168:	static int ulpi_init(struct usb_phy *);
+199:	static int ulpi_set_host(struct usb_otg *, struct usb_bus *);
+225:	static int ulpi_set_vbus(struct usb_otg *, bool);
+
 File drivers/usb/phy/phy.c:
 464:	struct usb_phy *devm_usb_get_phy(struct device *, enum usb_phy_type);
 535:	struct usb_phy *devm_usb_get_phy_by_node(struct device *, struct device_node *, struct notifier_block *);
@@ -398,6 +731,15 @@ File drivers/usb/phy/phy.c:
 766:	void usb_phy_set_event(struct usb_phy *, unsigned long);
 644:	void usb_put_phy(struct usb_phy *);
 748:	void usb_remove_phy(struct usb_phy *);
+177:	static void __usb_phy_get_charger_type(struct usb_phy *);
+349:	static int devm_usb_phy_match(struct device *, void *, void *);
+333:	static void devm_usb_phy_release(struct device *, void *);
+340:	static void devm_usb_phy_release2(struct device *, void *);
+364:	static int usb_add_extcon(struct usb_phy *);
+208:	static int usb_phy_get_charger_type(struct notifier_block *, unsigned long, void *);
+123:	static void usb_phy_notify_charger_work(struct work_struct *);
+148:	static int usb_phy_uevent(struct device *, struct kobj_uevent_env *);
+
 File drivers/usb/roles/class.c:
 149:	struct usb_role_switch *fwnode_usb_role_switch_get(struct fwnode_handle *);
 220:	const char *usb_role_string(enum usb_role);
@@ -410,149 +752,11 @@ File drivers/usb/roles/class.c:
 378:	void usb_role_switch_set_drvdata(struct usb_role_switch *, void *);
 42:	int usb_role_switch_set_role(struct usb_role_switch *, enum usb_role);
 366:	void usb_role_switch_unregister(struct usb_role_switch *);
-File drivers/usb/storage/initializers.c:
-34:	int usb_stor_euscsi_init(struct us_data *);
-84:	int usb_stor_huawei_e220_init(struct us_data *);
-51:	int usb_stor_ucr61s2b_init(struct us_data *);
-File drivers/usb/storage/option_ms.c:
-125:	int option_ms_init(struct us_data *);
-File drivers/usb/storage/protocol.c:
-121:	unsigned int usb_stor_access_xfer_buf(unsigned char *, unsigned int, struct scsi_cmnd *, struct scatterlist **, unsigned int *, enum xfer_buf_dir);
-45:	void usb_stor_pad12_command(struct scsi_cmnd *, struct us_data *);
-169:	void usb_stor_set_xfer_buf(unsigned char *, unsigned int, struct scsi_cmnd *);
-104:	void usb_stor_transparent_scsi_command(struct scsi_cmnd *, struct us_data *);
-61:	void usb_stor_ufi_command(struct scsi_cmnd *, struct us_data *);
-File drivers/usb/storage/scsiglue.c:
-663:	void usb_stor_host_template_init(struct scsi_host_template *, const char *, struct module *);
-500:	void usb_stor_report_bus_reset(struct us_data *);
-483:	void usb_stor_report_device_reset(struct us_data *);
-File drivers/usb/storage/sierra_ms.c:
-127:	int sierra_ms_init(struct us_data *);
-File drivers/usb/storage/transport.c:
-1075:	int usb_stor_Bulk_max_lun(struct us_data *);
-1413:	int usb_stor_Bulk_reset(struct us_data *);
-1115:	int usb_stor_Bulk_transport(struct scsi_cmnd *, struct us_data *);
-1398:	int usb_stor_CB_reset(struct us_data *);
-957:	int usb_stor_CB_transport(struct scsi_cmnd *, struct us_data *);
-466:	int usb_stor_bulk_srb(struct us_data *, unsigned int, struct scsi_cmnd *);
-385:	int usb_stor_bulk_transfer_buf(struct us_data *, unsigned int, void *, unsigned int, unsigned int *);
-488:	int usb_stor_bulk_transfer_sg(struct us_data *, unsigned int, void *, unsigned int, int, int *);
-227:	int usb_stor_clear_halt(struct us_data *, unsigned int);
-185:	int usb_stor_control_msg(struct us_data *, unsigned int, u8, u8, u16, u16, void *, u16, int);
-322:	int usb_stor_ctrl_transfer(struct us_data *, unsigned int, u8, u8, u16, u16, void *, u16);
-604:	void usb_stor_invoke_transport(struct scsi_cmnd *, struct us_data *);
-1425:	int usb_stor_port_reset(struct us_data *);
-933:	void usb_stor_stop_transport(struct us_data *);
-File drivers/usb/storage/usb.c:
-261:	void fill_inquiry_response(struct us_data *, unsigned char *, unsigned int);
-475:	void usb_stor_adjust_quirks(struct usb_device *, unsigned long *);
-1083:	void usb_stor_disconnect(struct usb_interface *);
-235:	int usb_stor_post_reset(struct usb_interface *);
-225:	int usb_stor_pre_reset(struct usb_interface *);
-936:	int usb_stor_probe1(struct us_data **, struct usb_interface *, const struct usb_device_id *, const struct us_unusual_dev *, struct scsi_host_template *);
-999:	int usb_stor_probe2(struct us_data *);
-File drivers/usb/storage/usual-tables.c:
-91:	int usb_usual_ignore_device(struct usb_interface *);
-File drivers/usb/typec/bus.c:
-246:	int __typec_altmode_register_driver(struct typec_altmode_driver *, struct module *);
-157:	void typec_altmode_attention(struct typec_altmode *, u32);
-97:	int typec_altmode_enter(struct typec_altmode *, u32 *);
-128:	int typec_altmode_exit(struct typec_altmode *);
-201:	const struct typec_altmode *typec_altmode_get_partner(struct typec_altmode *);
-221:	struct typec_altmode *typec_altmode_get_plug(struct typec_altmode *, enum typec_plug_index);
-57:	int typec_altmode_notify(struct typec_altmode *, unsigned long, void *);
-239:	void typec_altmode_put_plug(struct typec_altmode *);
-259:	void typec_altmode_unregister_driver(struct typec_altmode_driver *);
-177:	int typec_altmode_vdm(struct typec_altmode *, const u32, const u32 *, int);
-278:	struct typec_altmode *typec_match_altmode(struct typec_altmode **, size_t, u16, u8);
-File drivers/usb/typec/class.c:
-319:	struct typec_port *typec_altmode2port(struct typec_altmode *);
-290:	void typec_altmode_update_active(struct typec_altmode *, bool);
-1111:	struct typec_cable *typec_cable_get(struct typec_port *);
-1139:	int typec_cable_is_active(struct typec_cable *);
-1127:	void typec_cable_put(struct typec_cable *);
-1152:	int typec_cable_set_identity(struct typec_cable *);
-1905:	int typec_find_orientation(const char *);
-1949:	int typec_find_port_data_role(const char *);
-1920:	int typec_find_port_power_role(const char *);
-1935:	int typec_find_power_role(const char *);
-1890:	int typec_find_pwr_opmode(const char *);
-2046:	void *typec_get_drvdata(struct typec_port *);
-2052:	int typec_get_fw_cap(struct typec_capability *, struct fwnode_handle *);
-2026:	int typec_get_negotiated_svdm_version(struct typec_port *);
-1989:	enum typec_orientation typec_get_orientation(struct typec_port *);
-803:	struct typec_altmode *typec_partner_register_altmode(struct typec_partner *, const struct typec_altmode_desc *);
-691:	int typec_partner_set_identity(struct typec_partner *);
-771:	int typec_partner_set_num_altmodes(struct typec_partner *, int);
-709:	void typec_partner_set_pd_revision(struct typec_partner *, u16);
-817:	void typec_partner_set_svdm_version(struct typec_partner *, enum usb_pd_svdm_ver);
-736:	int typec_partner_set_usb_power_delivery(struct typec_partner *, struct usb_power_delivery *);
-836:	struct usb_power_delivery *typec_partner_usb_power_delivery_register(struct typec_partner *, struct usb_power_delivery_desc *);
-996:	struct typec_altmode *typec_plug_register_altmode(struct typec_plug *, const struct typec_altmode_desc *);
-964:	int typec_plug_set_num_altmodes(struct typec_plug *, int);
-2106:	struct typec_altmode *typec_port_register_altmode(struct typec_port *, const struct typec_altmode_desc *);
-2126:	void typec_port_register_altmodes(struct typec_port *, const struct typec_altmode_ops *, void *, struct typec_altmode **, size_t);
-1237:	int typec_port_set_usb_power_delivery(struct typec_port *, struct usb_power_delivery *);
-1172:	struct typec_cable *typec_register_cable(struct typec_port *, struct typec_cable_desc *);
-852:	struct typec_partner *typec_register_partner(struct typec_port *, struct typec_partner_desc *);
-1014:	struct typec_plug *typec_register_plug(struct typec_cable *, struct typec_plug_desc *);
-2189:	struct typec_port *typec_register_port(struct device *, const struct typec_capability *);
-1786:	void typec_set_data_role(struct typec_port *, enum typec_data_role);
-2003:	int typec_set_mode(struct typec_port *, int);
-1966:	int typec_set_orientation(struct typec_port *, enum typec_orientation);
-1855:	void typec_set_pwr_opmode(struct typec_port *, enum typec_pwr_opmode);
-1815:	void typec_set_pwr_role(struct typec_port *, enum typec_role);
-1834:	void typec_set_vconn_role(struct typec_port *, enum typec_role);
-582:	void typec_unregister_altmode(struct typec_altmode *);
-1217:	void typec_unregister_cable(struct typec_cable *);
-900:	void typec_unregister_partner(struct typec_partner *);
-1052:	void typec_unregister_plug(struct typec_plug *);
-2309:	void typec_unregister_port(struct typec_port *);
-File drivers/usb/typec/mux.c:
-338:	struct typec_mux *fwnode_typec_mux_get(struct fwnode_handle *, const struct typec_altmode_desc *);
-71:	struct typec_switch *fwnode_typec_switch_get(struct fwnode_handle *);
-509:	void *typec_mux_get_drvdata(struct typec_mux_dev *);
-394:	void typec_mux_put(struct typec_mux *);
-453:	struct typec_mux_dev *typec_mux_register(struct device *, const struct typec_mux_desc *);
-411:	int typec_mux_set(struct typec_mux *, struct typec_mux_state *);
-503:	void typec_mux_set_drvdata(struct typec_mux_dev *, void *);
-496:	void typec_mux_unregister(struct typec_mux_dev *);
-244:	void *typec_switch_get_drvdata(struct typec_switch_dev *);
-126:	void typec_switch_put(struct typec_switch *);
-165:	struct typec_switch_dev *typec_switch_register(struct device *, const struct typec_switch_desc *);
-203:	int typec_switch_set(struct typec_switch *, enum typec_orientation);
-238:	void typec_switch_set_drvdata(struct typec_switch_dev *, void *);
-231:	void typec_switch_unregister(struct typec_switch_dev *);
-File drivers/usb/typec/pd.c:
-704:	void usb_power_delivery_exit(void);
-580:	struct usb_power_delivery *usb_power_delivery_find(const char *);
-699:	int usb_power_delivery_init(void);
-661:	int usb_power_delivery_link_device(struct usb_power_delivery *, struct device *);
-606:	struct usb_power_delivery *usb_power_delivery_register(struct device *, struct usb_power_delivery_desc *);
-476:	struct usb_power_delivery_capabilities *usb_power_delivery_register_capabilities(struct usb_power_delivery *, struct usb_power_delivery_capabilities_desc *);
-686:	void usb_power_delivery_unlink_device(struct usb_power_delivery *, struct device *);
-644:	void usb_power_delivery_unregister(struct usb_power_delivery *);
-516:	void usb_power_delivery_unregister_capabilities(struct usb_power_delivery_capabilities *);
-File drivers/usb/typec/retimer.c:
-47:	struct typec_retimer *fwnode_typec_retimer_get(struct fwnode_handle *);
-152:	void *typec_retimer_get_drvdata(struct typec_retimer *);
-65:	void typec_retimer_put(struct typec_retimer *);
-105:	struct typec_retimer *typec_retimer_register(struct device *, const struct typec_retimer_desc *);
-74:	int typec_retimer_set(struct typec_retimer *, struct typec_retimer_state *);
-145:	void typec_retimer_unregister(struct typec_retimer *);
-File drivers/usb/typec/tcpm/tcpci.c:
-48:	struct tcpm_port *tcpci_get_tcpm_port(struct tcpci *);
-638:	irqreturn_t tcpci_irq(struct tcpci *);
-750:	struct tcpci *tcpci_register_port(struct device *, struct tcpci_data *);
-806:	void tcpci_unregister_port(struct tcpci *);
-File drivers/usb/typec/tcpm/tcpm.c:
-5434:	void tcpm_cc_change(struct tcpm_port *);
-5452:	void tcpm_pd_hard_reset(struct tcpm_port *);
-2976:	void tcpm_pd_receive(struct tcpm_port *, const struct pd_message *);
-926:	void tcpm_pd_transmit_complete(struct tcpm_port *, enum tcpm_transmit_status);
-6445:	struct tcpm_port *tcpm_register_port(struct device *, struct tcpc_dev *);
-5461:	void tcpm_sink_frs(struct tcpm_port *);
-5470:	void tcpm_sourcing_vbus(struct tcpm_port *);
-5984:	void tcpm_tcpc_reset(struct tcpm_port *);
-6555:	void tcpm_unregister_port(struct tcpm_port *);
-5443:	void tcpm_vbus_change(struct tcpm_port *);
+230:	static ssize_t role_show(struct device *, struct device_attribute *, char *);
+238:	static ssize_t role_store(struct device *, struct device_attribute *, const char *, size_t);
+203:	static umode_t usb_role_switch_is_visible(struct kobject *, struct attribute *, int);
+90:	static void *usb_role_switch_match(const struct fwnode_handle *, const char *, void *);
+289:	static void usb_role_switch_release(struct device *);
+278:	static int usb_role_switch_uevent(struct device *, struct kobj_uevent_env *);
+401:	static void usb_roles_exit(void);
+394:	static int usb_roles_init(void);
