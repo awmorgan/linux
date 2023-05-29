@@ -22,5 +22,12 @@
                 "arch/x86": true,
                 "arch/xtensa": true,
                 "tools": true,
-        }
+
+                "drivers/gpu/drm": true,
+                "drivers/sound": true,
+                "drivers/pci": true,
+
+                "include/generated": false,
+        },
+        // "C_Cpp.loggingLevel": "Debug"
 }
