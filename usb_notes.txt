@@ -1,0 +1,27 @@
+found usb dts settings in this file:
+
+        arch/arm64/boot/dts/ti/k3-j721e-main.dtsi
+
+these are the compatible strings and drivers in the dtsi file:
+
+        compatible = "ti,j721e-usb";
+                drivers/usb/cdns3/cdns3-ti.c
+
+        compatible = "cdns,usb3";
+                drivers/usb/cdns3/cdns3-plat.c
+
+
+got the list of all /usb/ files by using gdb:
+        gdb vmlinux
+        set logging on
+        info sources -dirname usb
+
+made list of global functions by using gdb:
+        gdb vmlinux
+        set logging on
+        info functions
+
+        usb_global_functions.txt is derived from this list
+
+
+->cdns3_plat_probe
